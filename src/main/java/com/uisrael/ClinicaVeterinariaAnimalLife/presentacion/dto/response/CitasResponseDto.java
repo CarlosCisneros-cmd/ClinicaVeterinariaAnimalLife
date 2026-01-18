@@ -8,11 +8,9 @@ import lombok.Data;
 @Data
 public class CitasResponseDto {
 	
-	private  int idCita;
-	private  int idPaciente;
-	private  int idVeterinario;
-	private  LocalDateTime fecha_Hora;
-	private VeterinarioResponseDto fkVeterinario;
-
+	private int idCita;
+	private PacienteResponseDTO fkPaciente;    
+    private VeterinarioResponseDto fkVeterinario; 
+    private LocalDateTime fecha_Hora; 
 }
 

@@ -15,20 +15,22 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "Citas")
-public class CitasJpa implements Serializable{
+public class CitasJpa implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private  int idCita;
-	private  int idPaciente;
-	private  LocalDateTime fecha_Hora;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_Veterinario")
-	private VeterinarioJpa fkVeterinario;
-	
-	
+    private static final long serialVersionUID = 1L;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idCita;
 
+   
+    @ManyToOne
+    @JoinColumn(name = "id_paciente") 
+    private PacienteJpa fkPaciente; 
+
+    private LocalDateTime fecha_Hora;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_veterinario")
+    private VeterinarioJpa fkVeterinario;
 }
