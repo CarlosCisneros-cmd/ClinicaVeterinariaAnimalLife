@@ -1,0 +1,46 @@
+package com.uisrael.ClinicaVeterinariaAnimalLife.infraestructura.persistencia.adaptadores;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.uisrael.ClinicaVeterinariaAnimalLife.domino.entidades.Clientes;
+import com.uisrael.ClinicaVeterinariaAnimalLife.domino.repositorio.IClientesRepositorio;
+import com.uisrael.ClinicaVeterinariaAnimalLife.infraestructura.persistencia.jpa.ClientesJpa;
+import com.uisrael.ClinicaVeterinariaAnimalLife.infraestructura.persistencia.mapeadores.IClienteJpaMapper;
+import com.uisrael.ClinicaVeterinariaAnimalLife.infraestructura.repositorio.jpa.IClientesJpaRepositorio;
+
+public class ClientesRespositorioImpl implements IClientesRepositorio{
+
+	private final IClientesJpaRepositorio jpaRepository;
+	private final IClienteJpaMapper entityMapper;
+	public ClientesRespositorioImpl(IClientesJpaRepositorio jpaRepository, IClienteJpaMapper entityMapper) {
+		this.jpaRepository = jpaRepository;
+		this.entityMapper = entityMapper;
+	}
+	@Override
+	public Clientes guardar(Clientes clientes) {
+		ClientesJpa entity = entityMapper.toEntity(clientes);
+		ClientesJpa guardado = jpaRepository.save(entity);
+		return entityMapper.toDomain(guardado);
+	}
+	@Override
+	public Optional<Clientes> buscarPorId(int id) {
+		return jpaRepository.findById(id)
+				.map(entityMapper::toDomain);
+		
+	}
+	@Override
+	public List<Clientes> listarTodos() {
+		return jpaRepository.findAll()
+				.stream()
+				.map(entityMapper::toDomain)
+				.toList();
+	}
+	@Override
+	public void eliminar(int id) {
+		jpaRepository.deleteById(id);
+		
+	}
+	
+	
+}
