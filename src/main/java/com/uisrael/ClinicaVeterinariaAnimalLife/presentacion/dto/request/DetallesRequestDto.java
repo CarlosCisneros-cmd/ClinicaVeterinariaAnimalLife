@@ -20,5 +20,7 @@ public class DetallesRequestDto {
 	private LocalDateTime fechaCreacion;
 	
 	private CabeceraRequestDto fkCabecera;
+	
+	private CitasRequestDto fkCita;
 
 }

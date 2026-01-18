@@ -9,8 +9,6 @@ public class Citas implements Serializable {
 	
 	private final int idCita;
 	private final LocalDateTime fecha_Hora;
-	
-	
 	private final Paciente fkPaciente; 
 	private final Veterinario fkVeterinario;
 

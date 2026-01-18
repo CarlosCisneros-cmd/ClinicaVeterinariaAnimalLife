@@ -13,17 +13,18 @@ private static final long serialVersionUID = 1L;
 	private final String Analisis;
 	private final LocalDateTime fechaCreacion;
 	private Cabecera fkCabecera;
+	private Citas fkCita;
 	
 	
 	public Detalles(int idDetalles, String descripcion, String diagnostico, String analisis,
-			LocalDateTime fechaCreacion, Cabecera fkCabecera) {
-		super();
+			LocalDateTime fechaCreacion, Cabecera fkCabecera, Citas fkCita) {
 		this.idDetalles = idDetalles;
 		Descripcion = descripcion;
 		Diagnostico = diagnostico;
 		Analisis = analisis;
 		this.fechaCreacion = fechaCreacion;
 		this.fkCabecera = fkCabecera;
+		this.fkCita = fkCita;
 	}
 
 
@@ -34,6 +35,16 @@ private static final long serialVersionUID = 1L;
 
 	public void setFkCabecera(Cabecera fkCabecera) {
 		this.fkCabecera = fkCabecera;
+	}
+
+
+	public Citas getFkCita() {
+		return fkCita;
+	}
+
+
+	public void setFkCita(Citas fkCita) {
+		this.fkCita = fkCita;
 	}
 
 
@@ -65,5 +76,18 @@ private static final long serialVersionUID = 1L;
 	public LocalDateTime getFechaCreacion() {
 		return fechaCreacion;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Detalles [idDetalles=" + idDetalles + ", Descripcion=" + Descripcion + ", Diagnostico=" + Diagnostico
+				+ ", Analisis=" + Analisis + ", fechaCreacion=" + fechaCreacion + ", fkCabecera=" + fkCabecera
+				+ ", fkCita=" + fkCita + "]";
+	}
+	
+	
+	
+	
 }
+	
 	

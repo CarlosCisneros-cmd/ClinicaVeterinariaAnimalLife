@@ -14,5 +14,6 @@ public class DetallesResponseDto {
 	private  String Analisis;
 	private LocalDateTime fechaCreacion;
 	private CabeceraResponseDto fkCabecera;
+	private CitasResponseDto fkCita;
 	
 }
