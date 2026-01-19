@@ -53,4 +53,13 @@ public class CitasRepositorioImpl implements ICitasRepositorio {
 	            .toList();
 	}
 
+
+	@Override
+	public List<Citas> buscarCitasPorVeterinarioyFecha(String nombre, LocalDateTime fecha_Hora) {
+		return jpaRepository.buscarCitasPorVeterinarioyFecha(nombre, fecha_Hora)
+			.stream()
+			.map(entityMapper::ToDomain) 
+			.toList();
+	}
+
 }

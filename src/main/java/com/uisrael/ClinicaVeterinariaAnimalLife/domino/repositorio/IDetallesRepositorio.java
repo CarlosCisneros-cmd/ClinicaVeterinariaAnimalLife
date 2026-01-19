@@ -11,4 +11,8 @@ public interface IDetallesRepositorio {
 	Optional<Detalles> buscarPorId(int id);
 	List<Detalles> listarTodos();
 	void eliminar(int id);
+
+	
+	List<Detalles> buscarDetallePorClienteyPaciente(String nombreCliente, String nombrePaciente);
+
 }

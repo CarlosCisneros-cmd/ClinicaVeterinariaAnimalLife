@@ -43,4 +43,10 @@ public class CitasUseCaseImpl implements ICitaUseCase{
 		return repositorio.buscarPorRango(inicio, fin);
 	}
 
+
+	@Override
+	public List<Citas> buscarCitasPorVeterinarioyFecha(String nombre, LocalDateTime fecha_hora) {
+		return repositorio.buscarCitasPorVeterinarioyFecha(nombre,fecha_hora);
+	}
+
 }

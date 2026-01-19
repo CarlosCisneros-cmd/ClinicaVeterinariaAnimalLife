@@ -36,6 +36,11 @@ private final IDetallesRepositorio repositorio;
 		
 	}
 
+	@Override
+	public List<Detalles> buscarDetallePorClienteyPaciente(String nombreCliente, String nombrePaciente) {
+		return repositorio.buscarDetallePorClienteyPaciente(nombreCliente,nombrePaciente);
+	}
+
 
 	
 	

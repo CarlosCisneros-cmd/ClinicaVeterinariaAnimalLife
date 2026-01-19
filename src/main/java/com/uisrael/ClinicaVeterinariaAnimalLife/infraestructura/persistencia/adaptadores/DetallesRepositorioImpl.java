@@ -49,4 +49,13 @@ public class DetallesRepositorioImpl implements IDetallesRepositorio {
 		jpaRepository.deleteById(id);
 		
 	}
+
+	@Override
+	public List<Detalles> buscarDetallePorClienteyPaciente(String nombreCliente, String nombrePaciente) {
+		return jpaRepository.buscarDetallePorClienteyPaciente(nombreCliente, nombrePaciente)
+				.stream()
+				.map(entityMapper::ToDomain)
+				.toList();
+	}
+
 }

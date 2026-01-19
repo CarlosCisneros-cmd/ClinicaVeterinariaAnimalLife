@@ -11,4 +11,8 @@ public interface IClienteUseCase {
 	List<Clientes> listar();
 	void eliminar(int id);
 
+	
+	List<Clientes> buscarPorNombresyCorreo (String nombres, String correo);
+
+
 }

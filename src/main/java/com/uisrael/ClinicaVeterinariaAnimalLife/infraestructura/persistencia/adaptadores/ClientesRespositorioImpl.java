@@ -41,6 +41,15 @@ public class ClientesRespositorioImpl implements IClientesRepositorio{
 		jpaRepository.deleteById(id);
 		
 	}
+
+	@Override
+	public List<Clientes> buscarPorNombresyCorreo(String nombres, String correo) {
+		return jpaRepository.buscarPorNombresyCorreo(nombres, correo)
+				.stream()
+	            .map(entityMapper::toDomain)
+	            .toList();
+	}
+
 	
 	
 }

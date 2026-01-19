@@ -46,6 +46,7 @@ public class PacienteUseCaseImpl implements IPacienteUseCase{
 	    return repositorio.buscarPorEspecie(especie);
 	}
 
+
 	@Override
 	public List<Paciente> buscarPacientesPorNombreVeterinario(String nombreVeterinario) {
 		return repositorio.buscarPacientesPorNombreVeterinario(nombreVeterinario);
@@ -58,4 +59,5 @@ public class PacienteUseCaseImpl implements IPacienteUseCase{
 	}
 	
 }
+
 

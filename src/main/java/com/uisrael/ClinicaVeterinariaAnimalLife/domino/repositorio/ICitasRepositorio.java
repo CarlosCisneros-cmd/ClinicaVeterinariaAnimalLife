@@ -15,4 +15,7 @@ public interface ICitasRepositorio {
 	void eliminar(int id);
 	
 	List<Citas> buscarPorRango(LocalDateTime inicio, LocalDateTime fin);
+
+	List<Citas> buscarCitasPorVeterinarioyFecha(String nombre, LocalDateTime fecha_Hora);
+
 }

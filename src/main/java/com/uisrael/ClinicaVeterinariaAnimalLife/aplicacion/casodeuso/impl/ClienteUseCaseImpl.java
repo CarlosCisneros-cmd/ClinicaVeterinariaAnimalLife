@@ -41,6 +41,13 @@ public class ClienteUseCaseImpl implements IClienteUseCase {
 		repositorio.eliminar(id);
 		
 	}
+
+
+	@Override
+	public List<Clientes> buscarPorNombresyCorreo(String nombres, String correo) {
+		return repositorio.buscarPorNombresyCorreo(nombres, correo);
+	}
+
 	
 	
 }

@@ -9,4 +9,7 @@ public interface IDetallesUseCase {
 	List<Detalles> listar();
 	void eliminar(int id);
 	
+
+	List<Detalles> buscarDetallePorClienteyPaciente(String nombreCliente, String nombrePaciente);
+
 }
