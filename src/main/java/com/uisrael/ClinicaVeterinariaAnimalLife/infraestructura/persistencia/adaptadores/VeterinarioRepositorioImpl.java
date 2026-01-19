@@ -57,5 +57,13 @@ public class VeterinarioRepositorioImpl implements IVeterinarioRepositorio {
 		jpaRepository.deleteById(id);
 		
 	}
+	
+	@Override
+	public List<Veterinario> buscarPorApellido(String apellido) {
+	    return jpaRepository.buscarPorApellido(apellido)
+	            .stream()
+	            .map(entityMapper::toDomain) 
+	            .toList();
+	}
 
 }

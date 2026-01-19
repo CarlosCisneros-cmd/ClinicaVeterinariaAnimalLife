@@ -11,6 +11,6 @@ public interface IVeterinarioUseCase {
 	List<Veterinario> listar();
 	void eliminar(int id);
 	
-	
+	List<Veterinario> buscarPorApellido(String apellido);
 
 }

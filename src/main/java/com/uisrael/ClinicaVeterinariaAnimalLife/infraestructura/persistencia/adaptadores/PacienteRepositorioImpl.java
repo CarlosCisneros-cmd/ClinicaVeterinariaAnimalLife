@@ -45,4 +45,12 @@ public class PacienteRepositorioImpl implements IPacienteRepositorio {
 		
 	}
 	
+	@Override
+	public List<Paciente> buscarPorEspecie(String especie) {
+	    return jpaRepository.buscarPorEspecie(especie)
+	            .stream()
+	            .map(entityMapper::toDomain)
+	            .toList();
+	}
+	
 }

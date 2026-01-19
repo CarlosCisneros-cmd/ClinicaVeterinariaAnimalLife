@@ -11,4 +11,6 @@ public interface IPacienteUseCase {
 	List<Paciente> listar();
 	void eliminar(int id);
 
+	
+	List<Paciente> buscarPorEspecie(String especie);
 }

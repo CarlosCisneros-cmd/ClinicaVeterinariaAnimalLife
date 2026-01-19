@@ -1,5 +1,6 @@
 package com.uisrael.ClinicaVeterinariaAnimalLife.infraestructura.persistencia.adaptadores;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +44,13 @@ public class CitasRepositorioImpl implements ICitasRepositorio {
 	public void eliminar(int id) {
 		jpaRepository.deleteById(id);
 		
+	}
+	@Override
+	public List<Citas> buscarPorRango(LocalDateTime inicio, LocalDateTime fin) {
+	    return jpaRepository.buscarPorRango(inicio, fin) 
+	            .stream()
+	            .map(entityMapper::ToDomain) 
+	            .toList();
 	}
 
 }

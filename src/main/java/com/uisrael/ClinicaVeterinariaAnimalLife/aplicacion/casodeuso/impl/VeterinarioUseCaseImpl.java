@@ -43,6 +43,9 @@ public class VeterinarioUseCaseImpl implements IVeterinarioUseCase {
 		
 	}
 	
-	
+	@Override
+	public List<Veterinario> buscarPorApellido(String apellido) {
+	    return repositorio.buscarPorApellido(apellido);
+	}
 
 }

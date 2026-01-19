@@ -1,8 +1,10 @@
 package com.uisrael.ClinicaVeterinariaAnimalLife.presentacion.controlador;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-
 import com.uisrael.ClinicaVeterinariaAnimalLife.aplicacion.casodeuso.entrada.*;
 import com.uisrael.ClinicaVeterinariaAnimalLife.presentacion.dto.mapeador.ICitaDtoMapper;
 import com.uisrael.ClinicaVeterinariaAnimalLife.presentacion.dto.request.CitasRequestDto;
@@ -56,5 +56,17 @@ public class CitasController {
 		citaUseCase.eliminar(id);
 		return ResponseEntity.noContent().build();
 	}
-
+	
+	@GetMapping("/buscar-rango/{inicio}/{fin}")
+	public ResponseEntity<List<CitasResponseDto>> buscarPorRango(
+	    @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime inicio,
+	    @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fin) {
+	    
+	    List<CitasResponseDto> lista = citaUseCase.buscarPorRango(inicio, fin)
+	            .stream()
+	            .map(mapper::toResponseDto) 
+	            .toList();
+	            
+	    return ResponseEntity.ok(lista);
+	}
 }

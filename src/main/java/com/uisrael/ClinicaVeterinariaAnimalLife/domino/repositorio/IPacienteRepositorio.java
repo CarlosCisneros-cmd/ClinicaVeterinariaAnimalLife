@@ -11,4 +11,6 @@ public interface IPacienteRepositorio {
 	Optional<Paciente> bucarPorId(int id);
 	List<Paciente> listarTodos();
 	void eliminar(int id);
+	
+	List<Paciente> buscarPorEspecie(String especie);
 }

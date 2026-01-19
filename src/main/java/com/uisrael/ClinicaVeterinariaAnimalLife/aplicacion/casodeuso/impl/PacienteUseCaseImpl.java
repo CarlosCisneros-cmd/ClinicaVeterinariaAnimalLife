@@ -41,4 +41,8 @@ public class PacienteUseCaseImpl implements IPacienteUseCase{
 		repositorio.eliminar(id);
 		
 	}
+	@Override
+	public List<Paciente> buscarPorEspecie(String especie) {
+	    return repositorio.buscarPorEspecie(especie);
+	}
 }

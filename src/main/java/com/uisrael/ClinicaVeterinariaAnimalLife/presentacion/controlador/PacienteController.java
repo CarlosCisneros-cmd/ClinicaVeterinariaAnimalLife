@@ -53,6 +53,15 @@ public class PacienteController {
 		pacienteUseCase.eliminar(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@GetMapping("/especie/{especie}")
+	public ResponseEntity<List<PacienteResponseDTO>> buscarPorEspecie(@PathVariable String especie) {
+	    List<PacienteResponseDTO> lista = pacienteUseCase.buscarPorEspecie(especie)
+	            .stream()
+	            .map(mapper::toResponseDto)
+	            .toList();
+	    return ResponseEntity.ok(lista);
+	}
 }
 	
 		

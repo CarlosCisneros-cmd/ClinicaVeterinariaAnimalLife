@@ -1,5 +1,6 @@
 package com.uisrael.ClinicaVeterinariaAnimalLife.domino.repositorio;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,4 +13,6 @@ public interface ICitasRepositorio {
 	Optional<Citas> buscarPorId(int id);
 	List<Citas> listarTodos();
 	void eliminar(int id);
+	
+	List<Citas> buscarPorRango(LocalDateTime inicio, LocalDateTime fin);
 }

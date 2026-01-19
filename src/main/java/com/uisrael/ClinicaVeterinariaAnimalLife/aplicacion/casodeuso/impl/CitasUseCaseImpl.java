@@ -1,5 +1,6 @@
 package com.uisrael.ClinicaVeterinariaAnimalLife.aplicacion.casodeuso.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.uisrael.ClinicaVeterinariaAnimalLife.aplicacion.casodeuso.entrada.ICitaUseCase;
@@ -36,6 +37,10 @@ public class CitasUseCaseImpl implements ICitaUseCase{
 	public void eliminar(int id) {
 		repositorio.eliminar(id);
 		
+	}
+	@Override
+	public List<Citas> buscarPorRango(LocalDateTime inicio, LocalDateTime fin) {
+		return repositorio.buscarPorRango(inicio, fin);
 	}
 
 }

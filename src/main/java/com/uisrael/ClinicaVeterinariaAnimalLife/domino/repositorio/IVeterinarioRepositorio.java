@@ -12,4 +12,6 @@ public interface IVeterinarioRepositorio {
 	List<Veterinario> listarTodos();
 	void eliminar(int id);
 
+	List<Veterinario> buscarPorApellido(String apellido);
+	
 }

@@ -49,4 +49,13 @@ public class VeterinarioController {
 		veterinarioUseCase.eliminar(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@GetMapping("/apellido/{apellido}")
+	public ResponseEntity<List<VeterinarioResponseDto>> buscarPorApellido(@PathVariable String apellido) {
+	    List<VeterinarioResponseDto> lista = veterinarioUseCase.buscarPorApellido(apellido)
+	            .stream()
+	            .map(mapper::toResponseDto)
+	            .toList();
+	    return ResponseEntity.ok(lista);
+	}
 }
