@@ -62,6 +62,16 @@ public class PacienteController {
 	            .toList();
 	    return ResponseEntity.ok(lista);
 	}
+	
+	@GetMapping("/buscar-por-veterinario")
+    public ResponseEntity<List<PacienteResponseDTO>> buscarPorVeterinario(@PathVariable String nombre) {
+        List<PacienteResponseDTO> lista = pacienteUseCase.buscarPacientesPorNombreVeterinario(nombre)
+		        .stream()
+		        .map(mapper::toResponseDto)
+		        .toList();
+		return ResponseEntity.ok(lista);
+  
+    }
 }
 	
 		

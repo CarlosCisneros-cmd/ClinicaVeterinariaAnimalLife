@@ -45,4 +45,10 @@ public class PacienteUseCaseImpl implements IPacienteUseCase{
 	public List<Paciente> buscarPorEspecie(String especie) {
 	    return repositorio.buscarPorEspecie(especie);
 	}
+
+	@Override
+	public List<Paciente> buscarPacientesPorNombreVeterinario(String nombreVeterinario) {
+		return repositorio.buscarPacientesPorNombreVeterinario(nombreVeterinario);
+		
+	}
 }

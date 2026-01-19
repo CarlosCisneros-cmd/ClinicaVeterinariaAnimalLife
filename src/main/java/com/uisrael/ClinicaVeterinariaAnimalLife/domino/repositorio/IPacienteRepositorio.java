@@ -13,4 +13,5 @@ public interface IPacienteRepositorio {
 	void eliminar(int id);
 	
 	List<Paciente> buscarPorEspecie(String especie);
+	List<Paciente> buscarPacientesPorNombreVeterinario(String nombreVeterinario);
 }

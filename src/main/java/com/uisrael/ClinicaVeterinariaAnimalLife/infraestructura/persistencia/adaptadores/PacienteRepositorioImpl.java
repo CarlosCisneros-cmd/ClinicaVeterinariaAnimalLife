@@ -3,8 +3,7 @@ package com.uisrael.ClinicaVeterinariaAnimalLife.infraestructura.persistencia.ad
 
 import java.util.List;
 import java.util.Optional;
-
-
+import java.util.stream.Collectors;
 
 import com.uisrael.ClinicaVeterinariaAnimalLife.domino.entidades.Paciente;
 import com.uisrael.ClinicaVeterinariaAnimalLife.domino.repositorio.IPacienteRepositorio;
@@ -52,5 +51,15 @@ public class PacienteRepositorioImpl implements IPacienteRepositorio {
 	            .map(entityMapper::toDomain)
 	            .toList();
 	}
+	@Override
+	public List<Paciente> buscarPacientesPorNombreVeterinario(String nombreVeterinario) {
+		List<PacienteJpa> listaJpa = jpaRepository.buscarPacientesPorNombreVeterinario(nombreVeterinario);
+		return listaJpa.stream()
+                .map(entityMapper::toDomain)
+                .collect(Collectors.toList());
+	}
+	
+	
+	
 	
 }
