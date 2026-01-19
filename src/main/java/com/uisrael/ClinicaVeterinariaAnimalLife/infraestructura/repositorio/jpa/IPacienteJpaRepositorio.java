@@ -20,4 +20,7 @@ public interface IPacienteJpaRepositorio extends JpaRepository<PacienteJpa, Inte
 	@Query("SELECT DISTINCT c.fkPaciente FROM CitasJpa c WHERE c.fkVeterinario.nombre LIKE %:nombreVet%")
     List<PacienteJpa> buscarPacientesPorNombreVeterinario(@Param("nombreVet") String nombreVet);
 	
+	@Query("select p FROM PacienteJpa p WHERE p.fkCliente.nombres LIKE %:nombreCliente%")
+    List<PacienteJpa> buscarPacientesPorNombreCliente(@Param("nombreCliente") String nombreCliente);
+	
 }

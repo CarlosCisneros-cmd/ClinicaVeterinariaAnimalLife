@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.uisrael.ClinicaVeterinariaAnimalLife.domino.entidades.Paciente;
 
+
 public interface IPacienteRepositorio {
 
 	Paciente guardar(Paciente paciente);
@@ -14,4 +15,5 @@ public interface IPacienteRepositorio {
 	
 	List<Paciente> buscarPorEspecie(String especie);
 	List<Paciente> buscarPacientesPorNombreVeterinario(String nombreVeterinario);
+	List<Paciente> buscarPacientesPorNombreCliente(String nombreCliente);
 }

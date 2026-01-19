@@ -51,4 +51,11 @@ public class PacienteUseCaseImpl implements IPacienteUseCase{
 		return repositorio.buscarPacientesPorNombreVeterinario(nombreVeterinario);
 		
 	}
+
+	@Override
+	public List<Paciente> buscarPacientesPorNombreCliente(String nombreCliente) {
+		return repositorio.buscarPacientesPorNombreCliente(nombreCliente);
+	}
+	
 }
+

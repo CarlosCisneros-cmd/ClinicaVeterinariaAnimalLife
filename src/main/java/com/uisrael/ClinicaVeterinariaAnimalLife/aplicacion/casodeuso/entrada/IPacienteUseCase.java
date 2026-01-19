@@ -14,4 +14,5 @@ public interface IPacienteUseCase {
 	
 	List<Paciente> buscarPorEspecie(String especie);
 	List<Paciente> buscarPacientesPorNombreVeterinario(String nombreVeterinario);
+	List<Paciente> buscarPacientesPorNombreCliente(String nombreCliente);
 }
