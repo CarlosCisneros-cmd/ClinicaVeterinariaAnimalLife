@@ -29,8 +29,7 @@ public class ClientesJpa implements Serializable{
 	 private String cedula;
 	 private String direccion;
 	
-	 //@OneToMany(mappedBy = "fkPaciente")//relaciones
-	 //private List<PacienteJpa> pacientes; //
+	
 	 
 	 
 

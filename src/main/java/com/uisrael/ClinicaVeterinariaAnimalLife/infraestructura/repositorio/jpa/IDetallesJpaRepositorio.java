@@ -13,8 +13,14 @@ import com.uisrael.ClinicaVeterinariaAnimalLife.infraestructura.persistencia.jpa
 public interface IDetallesJpaRepositorio extends JpaRepository<DetallesJpa, Integer>{
 
 	
-	@Query("SELECT d FROM DetallesJpa d WHERE d.cliente.nombres= :nombreCliente AND d.nombrePaciente= :nombrePaciente")
-	List<DetallesJpa> buscarDetallePorClienteyPaciente(@Param("nombreCliente")String nombreCliente,@Param("nombrePaciente")String nombrePaciente);
-
+	@Query("SELECT d FROM DetallesJpa d " +
+		       "JOIN d.fkCabecera c " +
+		       "JOIN d.fkCita ci " +
+		       "JOIN ci.fkPaciente p " +
+		       "WHERE c.nombreCliente = :nombreCliente AND p.raza = :nombrePaciente")
+		List<DetallesJpa> buscarDetallePorClienteyPaciente(
+		    @Param("nombreCliente") String nombreCliente, 
+		    @Param("nombrePaciente") String nombrePaciente
+		);
 
 }

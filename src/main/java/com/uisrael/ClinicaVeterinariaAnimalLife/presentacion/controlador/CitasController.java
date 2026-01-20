@@ -69,4 +69,17 @@ public class CitasController {
 	            
 	    return ResponseEntity.ok(lista);
 	}
+	
+	@GetMapping("/buscar-veterinario-fecha/{nombre}/{fecha}")
+	public ResponseEntity<List<CitasResponseDto>> buscarCitasPorVeterinarioyFecha(
+	    @PathVariable String nombre,
+	    @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fecha) {
+	    
+	    List<CitasResponseDto> lista = citaUseCase.buscarCitasPorVeterinarioyFecha(nombre, fecha)
+	            .stream()
+	            .map(mapper::toResponseDto) 
+	            .toList();
+	            
+	    return ResponseEntity.ok(lista);
+	}
 }

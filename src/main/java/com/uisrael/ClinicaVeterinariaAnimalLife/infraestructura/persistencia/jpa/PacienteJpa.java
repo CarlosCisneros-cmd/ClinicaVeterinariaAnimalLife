@@ -27,6 +27,7 @@ public class PacienteJpa implements Serializable{
 	private String sexo;
 	private String especie;
 	
+	
 	@ManyToOne
 	@JoinColumn(name = "id_Cliente")
 	private ClientesJpa fkCliente;

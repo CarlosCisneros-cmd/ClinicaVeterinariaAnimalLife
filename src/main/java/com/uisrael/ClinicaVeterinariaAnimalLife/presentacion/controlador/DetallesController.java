@@ -56,5 +56,18 @@ public class DetallesController {
 		detallesUseCase.eliminar(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@GetMapping("/buscar-cliente-paciente/{nombreCliente}/{nombrePaciente}")
+	public ResponseEntity<List<DetallesResponseDto>> buscarDetallePorClienteyPaciente(
+	    @PathVariable String nombreCliente,
+	    @PathVariable String nombrePaciente) {
+	    
+	    List<DetallesResponseDto> lista = detallesUseCase.buscarDetallePorClienteyPaciente(nombreCliente, nombrePaciente)
+	            .stream()
+	            .map(mapper::toResponseDto) 
+	            .toList();
+	            
+	    return ResponseEntity.ok(lista);
+	}
 
 }
