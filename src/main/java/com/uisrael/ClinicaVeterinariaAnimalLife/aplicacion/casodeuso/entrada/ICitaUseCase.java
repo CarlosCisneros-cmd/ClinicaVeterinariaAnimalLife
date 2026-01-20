@@ -13,9 +13,9 @@ public interface ICitaUseCase {
 	List<Citas> listar();
 	void eliminar(int id);
 
-	List<Citas> buscarPorRango(LocalDateTime inicio, LocalDateTime fin);
-
-	
 	List<Citas> buscarCitasPorVeterinarioyFecha(String nombre, LocalDateTime fecha_Hora);
+	List<Citas> buscarPorRango(LocalDateTime inicio, LocalDateTime fin);
+	
+	
 }
 

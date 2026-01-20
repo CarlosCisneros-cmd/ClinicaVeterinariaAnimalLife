@@ -63,7 +63,7 @@ public class PacienteController {
 	    return ResponseEntity.ok(lista);
 	}
 	
-	@GetMapping("/buscar-por-veterinario")
+	@GetMapping("/buscar-por-veterinario/{nombre}")
     public ResponseEntity<List<PacienteResponseDTO>> buscarPorVeterinario(@PathVariable String nombre) {
         List<PacienteResponseDTO> lista = pacienteUseCase.buscarPacientesPorNombreVeterinario(nombre)
 		        .stream()
@@ -73,7 +73,7 @@ public class PacienteController {
   
     }
 	
-	@GetMapping("/buscar-por-cliente")
+	@GetMapping("/buscar-por-cliente/{nombre}")
 	public ResponseEntity<List<PacienteResponseDTO>> buscarPorCliente(@PathVariable String nombre) {
 	    List<PacienteResponseDTO> lista = pacienteUseCase.buscarPacientesPorNombreCliente(nombre)
 	    		.stream()

@@ -42,10 +42,10 @@ public class Paciente implements Serializable{
 	public void setFkCliente(Clientes fkCliente) {
 		this.fkCliente = fkCliente;
 	}
-	
 	@Override
 	public String toString() {
 		return "Paciente [idPaciente=" + idPaciente + ", raza=" + raza + ", sexo=" + sexo + ", especie=" + especie
-				+ "]";
+				+ ", fkCliente=" + fkCliente + "]";
 	}
+	
 }

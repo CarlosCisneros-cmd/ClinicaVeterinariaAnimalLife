@@ -79,7 +79,7 @@ public class ConfiguracionGeneral {
     
     
     @Bean
-    ICitasRepositorio citaRepositoeio(ICitasJpaRepositorio jpaRepository, ICitasJpaMapper mapper) {
+    ICitasRepositorio citasRepositorio(ICitasJpaRepositorio jpaRepository, ICitasJpaMapper mapper) {
         return new CitasRepositorioImpl(jpaRepository, mapper);
     }
     @Bean
