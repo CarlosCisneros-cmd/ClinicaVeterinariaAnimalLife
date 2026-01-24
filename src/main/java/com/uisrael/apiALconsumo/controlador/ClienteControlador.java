@@ -14,5 +14,11 @@ public class ClienteControlador {
 		return "Cliente/Guardarcliente";
 		
 	}
+	
+	@GetMapping("/Listarcliente")
+	public String Listarcliente() {
+		return "Cliente/Listarcliente";
+		
+	}
 
 }
