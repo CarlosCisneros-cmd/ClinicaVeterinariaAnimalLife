@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="~{Plantilla/plantillaui}">
+		
+
+<head>
+	<meta charset="utf-8">
+   
+</head>
+
+<body>
+	
+    <div layout:fragment="contenido">
+
+        <h1 class="h3 mb-4 text-gray-800">Mascotas Del Cliente</h1>
+
+        <div class="card shadow mb-4">
+            
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Listado de Mascotas Del Cliente</h6>
+                 <a th:href="@{/Paciente}" class="btn btn-success btn-icon-split shadow-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-plus"></i>
+                    </span>
+                    <span class="text">Agregar Mascota</span>
+                </a>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Raza</th>
+                                <th>Sexo</th>
+                                <th>Especie</th>
+                                <th>Dueño</th>
+                                <th class="text-center">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Estrella</td>
+                                <td>Pequines</td>
+                                <td>Hembra</td>
+                                <td>Perro</td>  
+                                <td>Carlos Cisneros</td>
+                                <td class="text-center"> 
+                                    <a href="#" class="btn btn-info btn-icon-split btn-sm mr-2">
+                                        <span class="icon text-white-50"><i class="fas fa-arrow-right"></i></span>
+                                        <span class="text">Historial Medico</span>
+                                    </a>
+                                      <a href="#" class="btn btn-warning btn-circle btn-sm mr-1">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                  
+                                </td>
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</div>
+   
+
+</body>
+
+</html>

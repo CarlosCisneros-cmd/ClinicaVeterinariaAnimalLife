@@ -13,19 +13,12 @@
 	
     <div layout:fragment="contenido">
 
-        <h1 class="h3 mb-4 text-gray-800">Administración de Clientes</h1>
+        <h1 class="h3 mb-4 text-gray-800">Administración de Mascotas</h1>
 
         <div class="card shadow mb-4">
             
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Listado de Clientes Registrados</h6>
-                
-                <a th:href="@{/Cliente}" class="btn btn-success btn-icon-split shadow-sm">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-plus"></i>
-                    </span>
-                    <span class="text">Agregar Nuevo Cliente</span>
-                </a>
+                <h6 class="m-0 font-weight-bold text-primary">Listado de Mascotas Registradas</h6>
             </div>
 
             <div class="card-body">
@@ -34,20 +27,24 @@
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Dirección</th>
-                                <th>Teléfono</th>
+                                <th>Raza</th>
+                                <th>Sexo</th>
+                                <th>Especie</th>
+                                <th>Dueño</th>
                                 <th class="text-center">Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
+                                <td>Estrella</td>
+                                <td>Pequines</td>
+                                <td>Hembra</td>
+                                <td>Perro</td>  
                                 <td>Carlos Cisneros</td>
-                                <td>Quito, Centro Histórico</td>
-                                <td>0987654321</td>
                                 <td class="text-center"> 
-                                    <a th:href="@{/Paciente/Mostrarpaciente}" class="btn btn-info btn-icon-split btn-sm mr-2">
-                                        <span class="icon text-white-50"><i class="fas fa-dog"></i></span>
-                                        <span class="text">Mascotas</span>
+                                    <a href="#" class="btn btn-info btn-icon-split btn-sm mr-2">
+                                        <span class="icon text-white-50"><i class="fas fa-arrow-right"></i></span>
+                                        <span class="text">Historial Medico</span>
                                     </a>
                                       <a href="#" class="btn btn-warning btn-circle btn-sm mr-1">
                                         <i class="fas fa-pencil-alt"></i>
@@ -59,13 +56,15 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>Max</td>
+                                <td>Labrador</td>
+                                <td>Macho</td>
+                                <td>Perro</td>
                                 <td>Daniel Quiñonez</td>
-                                <td>Cumbayá, Av. Interoceánica</td>
-                                <td>0991234567</td>
                                 <td class="text-center"> 
-                                    <a th:href="@{/Paciente/Mostrarpaciente}" class="btn btn-info btn-icon-split btn-sm mr-2">
-                                        <span class="icon text-white-50"><i class="fas fa-dog"></i></span>
-                                        <span class="text">Mascotas</span>
+                                    <a href="#" class="btn btn-info btn-icon-split btn-sm mr-2">
+                                        <span class="icon text-white-50"><i class="fas fa-arrow-right"></i></span>
+                                        <span class="text">Historial Medico</span>
                                     </a>
                                      <a href="#" class="btn btn-warning btn-circle btn-sm mr-1">
                                         <i class="fas fa-pencil-alt"></i>
