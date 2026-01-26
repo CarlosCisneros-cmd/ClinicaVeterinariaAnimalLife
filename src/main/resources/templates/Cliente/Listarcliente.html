@@ -10,96 +10,69 @@
 </head>
 
 <body>
-	<div layout:fragment="contenido">
 	
-	
-    <div class="container-fluid">
+    <div layout:fragment="contenido">
+
+        <h1 class="h3 mb-4 text-gray-800">Administración de Clientes</h1>
+
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Clientes</h6>
+            
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Listado de Clientes Registrados</h6>
+                
+                <a th:href="@{/Cliente}" class="btn btn-success btn-icon-split shadow-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-plus"></i>
+                    </span>
+                    <span class="text">Agregar Nuevo Cliente</span>
+                </a>
             </div>
+
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Direccion</th>
-                                <th>Telefono</th>
+                                <th>Dirección</th>
+                                <th>Teléfono</th>
                                 <th class="text-center">Opciones</th>
                             </tr>
                         </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Direccion</th>
-                                <th>Telefono</th>
-                                <th class="text-center">Opciones</th>
-                            </tr>
-                        </tfoot>
                         <tbody>
-                            <tr class="odd">
-                                <td>Airi Satou</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
+                            <tr>
+                                <td>Carlos Cisneros</td>
+                                <td>Quito, Centro Histórico</td>
+                                <td>0987654321</td>
                                 <td class="text-center"> 
-                                    <a href="#" class="btn btn-info btn-icon-split mr-4">
-                                        <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
-                                        <span class="text">Mostrar Mascotas</span>
+                                    <a href="#" class="btn btn-info btn-icon-split btn-sm mr-2">
+                                        <span class="icon text-white-50"><i class="fas fa-dog"></i></span>
+                                        <span class="text">Mascotas</span>
                                     </a>
-                                    <a href="#" class="btn btn-danger btn-circle">
+                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
                             </tr>
-                            <tr class="odd">
-                                <td>Jose Wall</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
+                            <tr>
+                                <td>Daniel Quiñonez</td>
+                                <td>Cumbayá, Av. Interoceánica</td>
+                                <td>0991234567</td>
                                 <td class="text-center"> 
-                                    <a href="#" class="btn btn-info btn-icon-split mr-4">
-                                        <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
-                                        <span class="text">Mostrar Mascotas</span>
+                                    <a href="#" class="btn btn-info btn-icon-split btn-sm mr-2">
+                                        <span class="icon text-white-50"><i class="fas fa-dog"></i></span>
+                                        <span class="text">Mascotas</span>
                                     </a>
-                                    <a href="#" class="btn btn-danger btn-circle">
+                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
                             </tr>
-                            <tr class="odd">
-                                <td>Pablo tou</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td class="text-center"> 
-                                    <a href="#" class="btn btn-info btn-icon-split mr-4">
-                                        <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
-                                        <span class="text">Mostrar Mascotas</span>
-                                    </a>
-                                    <a href="#" class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="odd">
-                                <td>Mar gel</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td class="text-center"> 
-                                    <a href="#" class="btn btn-info btn-icon-split mr-4">
-                                        <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
-                                        <span class="text">Mostrar Mascotas</span>
-                                    </a>
-                                    <a href="#" class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            </tbody>
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
-    </div>
 </div>
    
 
