@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{Plantilla/plantillaui}">
+
+<head>
+    <title>Listado de Citas - Animal Life</title>
+</head>
+
+<body>
+    <div layout:fragment="contenido">
+        
+        <h1 class="h3 mb-4 text-gray-800">Gestión de Citas Médicas</h1>
+
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-filter"></i> Filtros de Búsqueda</h6>
+            </div>
+            <div class="card-body">
+                <form class="row">
+                    <div class="col-md-3 mb-3">
+                        <label>Ver por Mes:</label>
+                        <select class="form-control">
+                            <option>Todos los meses</option>
+                            <option>Enero</option>
+                            <option>Febrero</option>
+                            <option>Marzo</option>
+                            <option>Abril</option>
+                            <option>Mayo</option>
+                            <option>Junio</option>
+                            <option>Julio</option>
+                            <option>Agosto</option>
+                            <option>Septiembre</option>
+                            <option>Octubre</option>
+                            <option>Noviembre</option>
+                            <option>Diciembre</option>
+                            
+                            </select>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label>Día Específico:</label>
+                        <input type="date" class="form-control">
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label>Veterinario:</label>
+                        <select class="form-control">
+                            <option>Todos los médicos</option>
+                            <option>Dr. Ricardo Smith</option>
+                            <option>Dra. Ana López</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3 mb-3 d-flex align-items-end">
+                        <button type="button" class="btn btn-primary btn-block">
+                            <i class="fas fa-search fa-sm"></i> Aplicar Filtros
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Calendario de Consultas Encontradas</h6>
+                <a th:href="@{/Cita}" class="btn btn-success btn-sm shadow-sm">
+                    <i class="fas fa-plus fa-sm text-white-50"></i> Nueva Cita
+                </a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Fecha y Hora</th>
+                                <th>Paciente (Mascota)</th>
+                                <th>Propietario</th>
+                                <th>Veterinario</th>
+                                <th>Servicio</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2024-05-20 | 10:30</td>
+                                <td>Firulais</td>
+                                <td>Juan Pérez</td>
+                                <td>Dr. Smith</td>
+                                <td>Vacunación</td>
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-info btn-circle btn-sm"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -78,7 +78,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-paw"></i>
                     <span>Mascotas</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
@@ -90,20 +90,19 @@
                 </div>
             </li>
             
-			<li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#citas"
-                    aria-expanded="true" aria-controls="citas">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Citas</span>
-                </a>
-                <div id="citas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">opciones:</h6>
-                        <a class="collapse-item" th:href="@{/Cliente}">Crear Nueva Cita</a>
-                        <a class="collapse-item" th:href="@{/Cliente/Listarcliente}">Mostrar Citas</a>
-                    </div>
-                </div>
-            </li>
+		<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#citas"
+        aria-expanded="false" aria-controls="citas">
+        <i class="fas fa-fw fa-calendar-alt"></i> <span>Citas</span>
+    </a>
+    <div id="citas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">opciones:</h6>
+            <a class="collapse-item" th:href="@{/Cita}">Agendar Cita</a>
+            <a class="collapse-item" th:href="@{/Cita/Listarcita}">Ver Citas Hoy</a>
+        </div>
+    </div>
+</li>
             
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -124,13 +123,13 @@
         data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
+            <a class="collapse-item" href="login.html">Servicios</a>
             <a class="collapse-item" href="register.html">Register</a>
             <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
             <div class="collapse-divider"></div>
             <h6 class="collapse-header">Other Pages:</h6>
             <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item" href="blank.html">eee</a>
+            
         </div>
     </div>
 </li>
@@ -443,7 +442,7 @@
     <script th:src="@{/js/demo/datatables-demo.js}"></script>
     <script th:src="@{/js/demo/chart-pie-demo.js}"></script>
     
-
+     
 </body>
 
 </html>
