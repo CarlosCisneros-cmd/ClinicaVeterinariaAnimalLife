@@ -1,0 +1,50 @@
+@charset "UTF-8";
+.titulo-admin {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 48px;
+    font-weight: 600;
+    color: #ff6347; /* azul SB Admin */
+}
+/* HERO */
+.hero {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background-image: url("/img/Logotipo.png"); /* tu imagen */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+/* Tipografía */
+.hero-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 64px;
+    font-weight: 600;
+}
+
+.hero-subtitle {
+    letter-spacing: 3px;
+    font-size: 32px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
