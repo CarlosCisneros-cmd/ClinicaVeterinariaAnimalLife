@@ -36,14 +36,16 @@
                                 <th>Nombre</th>
                                 <th>Dirección</th>
                                 <th>Teléfono</th>
+                                <th>Cedula</th>
                                 <th class="text-center">Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Carlos Cisneros</td>
-                                <td>Quito, Centro Histórico</td>
-                                <td>0987654321</td>
+                            <tr th:each = "clienterecorrido: ${listarclientes}">
+                                <td th:text ="${clienterecorrido.nombres}"></td>
+                                <td th:text ="${clienterecorrido.direccion}"></td>
+                                <td th:text ="${clienterecorrido.telefono}"></td>
+                                <td th:text ="${clienterecorrido.cedula}"></td>
                                 <td class="text-center"> 
                                     <a th:href="@{/Paciente/Mostrarpaciente}" class="btn btn-info btn-icon-split btn-sm mr-2">
                                         <span class="icon text-white-50"><i class="fas fa-dog"></i></span>
@@ -56,24 +58,6 @@
                                         <i class="fas fa-trash"></i>
                                     </a>
                                   
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Daniel Quiñonez</td>
-                                <td>Cumbayá, Av. Interoceánica</td>
-                                <td>0991234567</td>
-                                <td class="text-center"> 
-                                    <a th:href="@{/Paciente/Mostrarpaciente}" class="btn btn-info btn-icon-split btn-sm mr-2">
-                                        <span class="icon text-white-50"><i class="fas fa-dog"></i></span>
-                                        <span class="text">Mascotas</span>
-                                    </a>
-                                     <a href="#" class="btn btn-warning btn-circle btn-sm mr-1">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                   
                                 </td>
                             </tr>
                         </tbody>
