@@ -8,6 +8,7 @@ public class PacienteResponseDTO {
 	
 	
 	private int idPaciente;
+	private String nombre;
 	private String raza;
 	private String sexo;
 	private String especie;

@@ -23,6 +23,7 @@ public class PacienteJpa implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idPaciente;
+	private String nombre;
 	private String raza;
 	private String sexo;
 	private String especie;

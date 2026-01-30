@@ -9,6 +9,8 @@ public class PacienteRequestDTO {
 	
 	private int idPaciente;
 	@NotBlank
+	private String nombre;
+	@NotBlank
 	private String raza;
 	@NotBlank
 	private String sexo;
