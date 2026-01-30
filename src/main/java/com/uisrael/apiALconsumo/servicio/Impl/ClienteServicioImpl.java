@@ -28,7 +28,7 @@ public class ClienteServicioImpl implements IClienteServicio{
 
 	@Override
 	public void crearCliente(ClienteRequestDto dto) {
-		webcliente.post().uri("/Cliente").bodyValue(dto).retrieve().toBodilessEntity().block();
+		webcliente.post().uri("/clientes").bodyValue(dto).retrieve().toBodilessEntity().block();
 		
 	}
 

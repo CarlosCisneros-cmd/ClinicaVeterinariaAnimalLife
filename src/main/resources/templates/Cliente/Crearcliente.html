@@ -19,43 +19,43 @@
 		                <h6 class="m-0 font-weight-bold text-primary">Datos del Propietario</h6>
 		            </div>
 		            <div class="card-body">
-		                <form>
+		                <form th:action="@{Cliente/Guardar}" th:object="${cliente}" method="post">
 		                    <div class="form-group row">
 		                        <div class="col-sm-6 mb-3 mb-sm-0">
 		                            <label>Nombres</label>
-		                            <input type="text" class="form-control" placeholder="Juan">
+		                            <input type="text" class="form-control" placeholder="Juan" th:field="*{nombres}">
 		                        </div>
 		                        <div class="col-sm-6">
 		                            <label>Apellidos</label>
-		                            <input type="text" class="form-control" placeholder="Pérez">
+		                            <input type="text" class="form-control" placeholder="Pérez" th:field="*{apellidos}">
 		                        </div>
 		                    </div>
 
 		                    <div class="form-group row">
 		                        <div class="col-sm-6 mb-3 mb-sm-0">
 		                            <label>Cédula</label>
-		                            <input type="text" class="form-control" placeholder="172xxxxxxx">
+		                            <input type="text" class="form-control" placeholder="172xxxxxxx" th:field="*{cedula}">
 		                        </div>
 		                        <div class="col-sm-6">
 		                            <label>Teléfono</label>
-		                            <input type="text" class="form-control" placeholder="099xxxxxxx">
+		                            <input type="text" class="form-control" placeholder="099xxxxxxx" th:field="*{telefono}">
 		                        </div>
 		                    </div>
 
 		                    <div class="form-group row">
 		                        <div class="col-sm-6 mb-3 mb-sm-0">
 		                            <label>Correo</label>
-		                            <input type="email" class="form-control" placeholder="correo@ejemplo.com">
+		                            <input type="email" class="form-control" placeholder="correo@ejemplo.com" th:field="*{correo}">
 		                        </div>
 		                        <div class="col-sm-6">
 		                            <label>Dirección</label>
-		                            <input type="text" class="form-control" placeholder="Quito, Sector...">
+		                            <input type="text" class="form-control" placeholder="Quito, Sector..." th:field="*{direccion}">
 		                        </div>
 		                    </div>
 
 		                    <hr>
 
-		                    <button type="button" class="btn btn-primary btn-icon-split">
+		                    <button type="submit" class="btn btn-primary btn-icon-split">
 		                        <span class="icon text-white-50"><i class="fas fa-check"></i></span>
 		                        <span class="text">Guardar</span>
 		                    </button>

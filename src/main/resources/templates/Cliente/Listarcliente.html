@@ -42,7 +42,7 @@
                         </thead>
                         <tbody>
                             <tr th:each = "clienterecorrido: ${listarclientes}">
-                                <td th:text ="${clienterecorrido.nombres}"></td>
+                                <td th:text ="${clienterecorrido.nombres} + ' ' + ${clienterecorrido.apellidos}"></td>
                                 <td th:text ="${clienterecorrido.direccion}"></td>
                                 <td th:text ="${clienterecorrido.telefono}"></td>
                                 <td th:text ="${clienterecorrido.cedula}"></td>

@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.uisrael.apiALconsumo.modelo.dto.request.ClienteRequestDto;
 import com.uisrael.apiALconsumo.modelo.dto.response.ClienteResponseDto;
 import com.uisrael.apiALconsumo.servicio.IClienteServicio;
 
@@ -20,8 +23,9 @@ public class ClienteControlador {
 	
 	
 	@GetMapping
-	public String Guardarcliente() {
-		return "Cliente/Guardarcliente";
+	public String Crearcliente(Model model) {
+		model.addAttribute("cliente",new ClienteRequestDto());
+		return "Cliente/Crearcliente";
 		
 	}
 	
@@ -32,5 +36,12 @@ public class ClienteControlador {
 		return "Cliente/Listarcliente";
 		
 	}
+	@PostMapping("/Guardar")
+	public String Guardarcliente(@ModelAttribute ClienteRequestDto cliente) {
+		servicioCliente.crearCliente(cliente);
+		return "redirect:/Cliente/Listarcliente";
+		
+	}
+	
 
 }
