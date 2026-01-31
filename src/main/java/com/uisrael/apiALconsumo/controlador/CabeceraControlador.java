@@ -1,0 +1,16 @@
+package com.uisrael.apiALconsumo.controlador;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/Cabecera")
+public class CabeceraControlador {
+	
+	@GetMapping
+    public String Mostrarcabecera() {
+        return "Cabecera/Mostrarcabecera";
+    }
+
+}
