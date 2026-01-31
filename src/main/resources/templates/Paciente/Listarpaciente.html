@@ -12,13 +12,12 @@
 
     <div layout:fragment="contenido">
 
-        <h1 class="h3 mb-4 text-gray-800">Administración de Mascotas</h1>
+        <h1 class="h3 mb-4 text-gray-800">Administración Global de Mascotas</h1>
 
         <div class="card shadow mb-4">
-            
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Listado de Mascotas Registradas</h6>
-            </div>
+                <h6 class="m-0 font-weight-bold text-primary">Listado General de Pacientes</h6>
+                </div>
 
             <div class="card-body">
                 <div class="table-responsive">
@@ -26,6 +25,7 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Nombre</th>
                                 <th>Raza</th>
                                 <th>Sexo</th>
                                 <th>Especie</th>
@@ -35,16 +35,17 @@
                         </thead>
                         <tbody>
                             <tr th:each="mascota : ${listaMascotas}">
-                                <td th:text="${mascota.idPaciente}">0</td>
-                                <td th:text="${mascota.raza}">Raza</td>
-                                <td th:text="${mascota.sexo}">Sexo</td>
-                                <td th:text="${mascota.especie}">Especie</td>  
-                                <td th:text="${mascota.fkCliente != null ? mascota.fkCliente.nombres : 'Sin Dueño'}">Nombre Dueño</td>
+                                <td th:text="${mascota.idPaciente}"></td>
+                                <td th:text="${mascota.nombre}"></td>
+                                <td th:text="${mascota.raza}"></td>
+                                <td th:text="${mascota.sexo}"></td>
+                                <td th:text="${mascota.especie}"></td>  
+                                <td th:text="${mascota.fkCliente != null ? mascota.fkCliente.nombres + ' ' + mascota.fkCliente.apellidos : 'Sin Dueño'}"></td>
                                 
                                 <td class="text-center"> 
                                     <a th:href="@{/Cabecera}" class="btn btn-info btn-icon-split btn-sm mr-2">
                                         <span class="icon text-white-50"><i class="fas fa-arrow-right"></i></span>
-                                        <span class="text">Historial</span>
+                                        <span class="text">Historial Medico</span>
                                     </a>
                                     <a href="#" class="btn btn-warning btn-circle btn-sm mr-1">
                                         <i class="fas fa-pencil-alt"></i>
@@ -56,7 +57,7 @@
                             </tr>
                             
                             <tr th:if="${#lists.isEmpty(listaMascotas)}">
-                                <td colspan="6" class="text-center">No hay mascotas registradas en la base de datos.</td>
+                                <td colspan="7" class="text-center">No hay mascotas registradas en la base de datos.</td>
                             </tr>
                         </tbody>
                     </table>

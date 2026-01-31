@@ -1,11 +1,18 @@
 package com.uisrael.apiALconsumo.controlador;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model; 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.uisrael.apiALconsumo.modelo.dto.request.ClienteRequestDto; 
+import com.uisrael.apiALconsumo.modelo.dto.request.PacienteRequestDTO;
 import com.uisrael.apiALconsumo.modelo.dto.response.PacienteResponseDTO;
 import com.uisrael.apiALconsumo.servicio.IPacienteServicio;
 
@@ -14,25 +21,45 @@ import com.uisrael.apiALconsumo.servicio.IPacienteServicio;
 public class PacienteControlador {
 	
 	@Autowired
-	private IPacienteServicio servicioPaciente; 
+	private IPacienteServicio servicioPaciente;
 
 	@GetMapping("/Listarpaciente")
 	public String Listarpaciente(Model model) {
-	
 		List<PacienteResponseDTO> datosMascotas = servicioPaciente.Listarpaciente();
-		
 		model.addAttribute("listaMascotas", datosMascotas);
-		
-		return "Paciente/Listarpaciente"; 
+		return "Paciente/Listarpaciente";
 	}
 
-	@GetMapping
-	public String Guardarpaciente() {
-		return "Paciente/GuardarPaciente";
+	@GetMapping("/Nuevo")
+	public String Crearpaciente(@RequestParam int idCliente, Model model) {
+		PacienteRequestDTO nuevo = new PacienteRequestDTO();
+		nuevo.setFkCliente(new ClienteRequestDto());
+		nuevo.getFkCliente().setIdCliente(idCliente); 
+		
+		model.addAttribute("paciente", nuevo);
+		model.addAttribute("idCliente", idCliente);
+		return "Paciente/Crearpaciente";
 	}
 	
 	@GetMapping("/Mostrarpaciente")
-	public String Mostrarpaciente() {
+	public String Mostrarpaciente(@RequestParam int idCliente, Model model) {
+		model.addAttribute("idCliente", idCliente);
+		
+		
+		List<PacienteResponseDTO> todasMascotas = servicioPaciente.Listarpaciente();
+		
+		List<PacienteResponseDTO> filtradas = todasMascotas.stream()
+			.filter(p -> p.getFkCliente() != null && p.getFkCliente().getIdCliente() == idCliente)
+			.collect(Collectors.toList());
+			
+		model.addAttribute("listaMascotas", filtradas);
 		return "Paciente/Mostrarpaciente";
+	}
+
+	@PostMapping("/Guardar")
+	public String Guardarpaciente(@ModelAttribute PacienteRequestDTO paciente) {
+		servicioPaciente.crearPaciente(paciente);
+		int id = (paciente.getFkCliente() != null) ? paciente.getFkCliente().getIdCliente() : 0;
+		return "redirect:/Paciente/Mostrarpaciente?idCliente=" + id;
 	}
 }

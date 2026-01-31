@@ -29,7 +29,8 @@ public class PacienteServicioImpl implements IPacienteServicio{
 
 	@Override
 	public void crearPaciente(PacienteRequestDTO dto) {
-		webcliente.post().uri("/Paciente").bodyValue(dto).retrieve().toBodilessEntity().block();
+		webcliente.post().uri("/pacientes").bodyValue(dto).retrieve().toBodilessEntity().block();
 		
 	}
+
 }
