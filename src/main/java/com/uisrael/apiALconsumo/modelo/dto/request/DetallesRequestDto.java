@@ -1,0 +1,16 @@
+package com.uisrael.apiALconsumo.modelo.dto.request;
+
+import java.time.LocalDateTime;
+
+import lombok.Data;
+
+@Data
+public class DetallesRequestDto {
+	
+	private  int idDetalles;
+	private  String Descripcion;
+	private  String Diagnostico;
+	private  String Analisis;
+	private LocalDateTime fechaCreacion;
+
+}

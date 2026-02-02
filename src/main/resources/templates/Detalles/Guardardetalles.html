@@ -5,28 +5,27 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Nuevo Servicio - Animal Life</title>
+    <title>Nuevo Detalle - Animal Life</title>
 </head>
 
 <body>
     <div layout:fragment="contenido">
-        <h1 class="h3 mb-4 text-gray-800">Administración de Servicios</h1>
+        <h1 class="h3 mb-4 text-gray-800">Administración de Detalles</h1>
 
         <div class="row justify-content-center">
             <div class="col-lg-7">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Registrar Nuevo Servicio</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Registrar Nuevo Detalle</h6>
                     </div>
                     <div class="card-body">
-                        <form th:action="@{/servicio/guardar}" th:object="${servicio}" method="post">
+                        <form th:action="@{/detalles/guardar}" th:object="${detalle}" method="post">
                             
                             <div class="row">
                                 <div class="col-md-12 mb-3">
-                                    <label class="font-weight-bold">Nombre del Servicio</label>
-                                    <input type="text" th:field="*{nombre_ser}" class="form-control" 
-                                           placeholder="Ej: Vacunación, Cirugía, Baño" required>
-                                    <small class="form-text text-muted">Use un nombre claro para el catálogo.</small>
+                                    <label class="font-weight-bold">Nombre del Detalle</label>
+                                    <input type="text" th:field="*{nombre_det}" class="form-control" 
+                                           placeholder="Ej: Detalle de cirugía, Descripción de baño" required>
                                 </div>
                             </div>
 
@@ -35,10 +34,10 @@
                             <div class="mt-4">
                                 <button type="submit" class="btn btn-success btn-icon-split">
                                     <span class="icon text-white-50"><i class="fas fa-check"></i></span>
-                                    <span class="text">Guardar Servicio</span>
+                                    <span class="text">Guardar Detalle</span>
                                 </button>
 
-                                <a th:href="@{/servicio/listar}" class="btn btn-secondary btn-icon-split ml-2">
+                                <a th:href="@{/detalles/listar}" class="btn btn-secondary btn-icon-split ml-2">
                                     <span class="icon text-white-50"><i class="fas fa-times"></i></span>
                                     <span class="text">Cancelar</span>
                                 </a>
