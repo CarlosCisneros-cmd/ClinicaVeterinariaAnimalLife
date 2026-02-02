@@ -1,7 +1,6 @@
 package com.uisrael.apiALconsumo.controlador;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,30 +19,22 @@ public class VeterinarioControlador {
 	@Autowired
 	private IVeterinarioServicio servicioVeterinario;
 	
-	
 	@GetMapping("/Nuevo")
 	public String formulario(Model model) {
 	    model.addAttribute("veterinario", new VeterinarioRequestDto());
 	    return "Veterinario/Guardarveterinario";
 	}
-
-      @GetMapping("/Listar")
-      public String listarVeterinario() {
-          return "Veterinario/Listarveterinario";
-      }
-      
-      @GetMapping("/Listarveterinario")
-  	public String Listarveterinario(Model model ) {
+	
+    @GetMapping("/Listarveterinario")
+  	public String Listarveterinario(Model model) {
   		List<VeterinarioResponseDto> datosBase = servicioVeterinario.listarVeterinario();
-  		model.addAttribute("listarveterinario",datosBase);
+  		model.addAttribute("listarveterinario", datosBase);
   		return "Veterinario/Listarveterinario";
-  		
   	}
+
   	@PostMapping("/Guardar")
   	public String Guardarveterinario(@ModelAttribute VeterinarioRequestDto veterinario) {
   		servicioVeterinario.crearVeterinario(veterinario);
   		return "redirect:/Veterinario/Listarveterinario";
-  		
   	}
-  }
-
+}

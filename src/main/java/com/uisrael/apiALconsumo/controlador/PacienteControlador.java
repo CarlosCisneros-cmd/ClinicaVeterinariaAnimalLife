@@ -35,7 +35,6 @@ public class PacienteControlador {
 		PacienteRequestDTO nuevo = new PacienteRequestDTO();
 		nuevo.setFkCliente(new ClienteRequestDto());
 		nuevo.getFkCliente().setIdCliente(idCliente); 
-		
 		model.addAttribute("paciente", nuevo);
 		model.addAttribute("idCliente", idCliente);
 		return "Paciente/Crearpaciente";
@@ -44,14 +43,10 @@ public class PacienteControlador {
 	@GetMapping("/Mostrarpaciente")
 	public String Mostrarpaciente(@RequestParam int idCliente, Model model) {
 		model.addAttribute("idCliente", idCliente);
-		
-		
 		List<PacienteResponseDTO> todasMascotas = servicioPaciente.Listarpaciente();
-		
 		List<PacienteResponseDTO> filtradas = todasMascotas.stream()
 			.filter(p -> p.getFkCliente() != null && p.getFkCliente().getIdCliente() == idCliente)
 			.collect(Collectors.toList());
-			
 		model.addAttribute("listaMascotas", filtradas);
 		return "Paciente/Mostrarpaciente";
 	}

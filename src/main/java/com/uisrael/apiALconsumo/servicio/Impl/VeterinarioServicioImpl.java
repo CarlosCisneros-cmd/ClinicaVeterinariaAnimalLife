@@ -23,12 +23,12 @@ public class VeterinarioServicioImpl implements IVeterinarioServicio{
 
 	@Override
 	public void crearVeterinario(VeterinarioRequestDto dto) {
-		webcliente.post().uri("/veterinarios").bodyValue(dto).retrieve().toBodilessEntity().block();
+		webcliente.post().uri("/veterinario").bodyValue(dto).retrieve().toBodilessEntity().block();
 	}
 
 	@Override
 	public List<VeterinarioResponseDto> listarVeterinario() {
-		return webcliente.get().uri("/veterinarios").retrieve().bodyToFlux(VeterinarioResponseDto.class).collectList().block();
+		return webcliente.get().uri("/veterinario").retrieve().bodyToFlux(VeterinarioResponseDto.class).collectList().block();
 	}
 
 	
