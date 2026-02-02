@@ -11,4 +11,5 @@ public interface IPacienteServicio {
 
 	public List<PacienteResponseDTO>Listarpaciente();
 	public void crearPaciente(PacienteRequestDTO dto);
+	public void eliminarPaciente(int id);
 }
