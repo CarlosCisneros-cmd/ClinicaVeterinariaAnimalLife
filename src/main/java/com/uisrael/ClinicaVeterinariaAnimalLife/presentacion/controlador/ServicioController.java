@@ -22,7 +22,7 @@ import com.uisrael.ClinicaVeterinariaAnimalLife.presentacion.dto.response.Servic
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/servicio")
+@RequestMapping("/api/servicios")
 public class ServicioController {
 	
 	private final IServicioUseCase servicioUseCase;

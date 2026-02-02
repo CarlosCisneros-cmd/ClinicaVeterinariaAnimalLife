@@ -7,7 +7,6 @@ public class ServicioResponseDto {
 	
 	private int idservicio;
 	private String nombre_ser;
-	
 	private CitasResponseDto fkCita;
 
 	
