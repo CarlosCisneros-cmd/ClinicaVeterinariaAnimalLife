@@ -5,7 +5,6 @@ import lombok.Data;
 
 @Data
 public class ServicioRequestDto {
-	
 	private int idservicio;
 	@NotBlank
 	private String nombre_ser;
