@@ -12,51 +12,48 @@
 <body>
 	
     <div layout:fragment="contenido">
+    <h1 class="h3 mb-4 text-gray-800">Historial de Paciente</h1>
 
-        <h1 class="h3 mb-4 text-gray-800">Historial de Paciente</h1>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">         
+            <a th:href="@{/Cabecera/Crearcabecera(idPaciente=${idPaciente}, nombrePac=${nombrePac}, nombreCli=${nombreCli})}" 
+               class="btn btn-success btn-icon-split shadow-sm">
+                <span class="icon text-white-50"><i class="fas fa-plus"></i></span>
+                <span class="text">Agregar Nuevo Historial</span>
+            </a>
+        </div>
 
-        <div class="card shadow mb-4">
-            
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <div class="card-header py-3">
-				    <h6 class="mb-2 font-weight-bold text-primary">Nombre del Paciente: (nombre)</h6>
-				    <div class="mb-2"></div> <h6 class="mb-2 font-weight-bold text-primary">Dueño: (nombre)</h6>
-				    <h6 class="mb-2 font-weight-bold text-primary">Fecha de creacion (fecha de ese dia)</h6>
-				</div>
-                
-                <a th:href="@{/Cliente}" class="btn btn-success btn-icon-split shadow-sm">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-plus"></i>
-                    </span>
-                    <span class="text">Agregar Nueva Historia</span>
-                </a>
-            </div>
-
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Fecha Creacion</th>
-                                <th>Descripcion</th>
-                                <th>Diagnostico</th>
-                                <th>Analisis</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td >12/12/2001</td>
-                                <td >ewfwieof werofwoerfwoeprv werkvw ekrvowervowker wekvwoekvwoerkvowekr werkv wekv weov</td>
-                                <td >werv werv wervwevwervwevwmervm wemrv mwermv mwermv mwerv mwervmwervmw werv</td>
-                                <td >wervwerv wervwerv wlevweorvoweorvoweirvwekvmosdfpv werv wefvw efvwefvwervwefvmkw wekfvmkwemfvkw </td>
-                                
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Fecha Creación</th>
+                            <th>Paciente</th>
+                            <th>Dueño</th>
+                            <th>Detalles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="cab : ${listarcabeceras}">
+                            <td th:text="${#temporals.format(cab.fechaCreacion, 'dd/MM/yyyy HH:mm')}"></td>
+                            <td th:text="${cab.nombreCabecera}"></td>
+                            <td th:text="${cab.nombreCliente}"></td>
+                            <td> <a 
+                                       class="btn btn-info btn-icon-split btn-sm mr-2">
+                                        <span class="icon text-white-50"><i class="fas fa-dog"></i></span>
+                                        <span class="text">Detalles</span>
+                                </a>
+                           </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(listarcabeceras)}">
+                            <td colspan="4" class="text-center">No hay historias clínicas para este paciente.</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
+    </div>
 </div>
    
 

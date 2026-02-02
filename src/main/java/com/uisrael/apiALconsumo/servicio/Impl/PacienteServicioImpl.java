@@ -5,9 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-
 import com.uisrael.apiALconsumo.modelo.dto.request.PacienteRequestDTO;
-
 import com.uisrael.apiALconsumo.modelo.dto.response.PacienteResponseDTO;
 import com.uisrael.apiALconsumo.servicio.IPacienteServicio;
 
