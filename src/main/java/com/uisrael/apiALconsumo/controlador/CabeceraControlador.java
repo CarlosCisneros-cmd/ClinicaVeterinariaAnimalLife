@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.uisrael.apiALconsumo.modelo.dto.request.CabeceraRequestDto;
-import com.uisrael.apiALconsumo.modelo.dto.request.PacienteRequestDTO;
 import com.uisrael.apiALconsumo.modelo.dto.response.CabeceraResponseDto;
 import com.uisrael.apiALconsumo.modelo.dto.response.PacienteResponseDTO;
 import com.uisrael.apiALconsumo.servicio.ICabeceraServicio;
