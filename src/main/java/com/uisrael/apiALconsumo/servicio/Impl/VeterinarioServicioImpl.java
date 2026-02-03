@@ -31,11 +31,12 @@ public class VeterinarioServicioImpl implements IVeterinarioServicio{
 		return webcliente.get().uri("/veterinario").retrieve().bodyToFlux(VeterinarioResponseDto.class).collectList().block();
 	}
 
-	
-	
-	
-	
-	
+	@Override
+	public void eliminarVeterinario(int id) {
+		webcliente.delete().uri("/veterinario/{id}", id) .retrieve().toBodilessEntity().block();
+		
+	}
+		
 }
 
 

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.uisrael.apiALconsumo.modelo.dto.request.VeterinarioRequestDto;
@@ -37,4 +38,9 @@ public class VeterinarioControlador {
   		servicioVeterinario.crearVeterinario(veterinario);
   		return "redirect:/Veterinario/Listarveterinario";
   	}
+  	@GetMapping("/Eliminar/{id}")
+    public String eliminarCliente(@PathVariable int id) {
+        servicioVeterinario.eliminarVeterinario(id);
+        return "redirect:/Veterinario/Listarveterinario";
+    }
 }
