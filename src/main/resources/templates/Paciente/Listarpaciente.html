@@ -17,7 +17,7 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Listado General de Pacientes</h6>
-                </div>
+            </div>
 
             <div class="card-body">
                 <div class="table-responsive">
@@ -51,7 +51,9 @@
                                     <a href="#" class="btn btn-warning btn-circle btn-sm mr-1">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                    <a th:href="@{/Paciente/Eliminar/{id}(id=${mascota.idPaciente})}" 
+                                       class="btn btn-danger btn-circle btn-sm"
+                                       onclick="return confirm('¿Está seguro de eliminar esta mascota del sistema?');">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>

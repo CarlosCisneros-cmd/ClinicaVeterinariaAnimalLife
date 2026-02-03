@@ -5,6 +5,7 @@
 
 <head>
     <meta charset="utf-8">
+    <title>Mascotas del Cliente - Animal Life</title>
 </head>
 
 <body>
@@ -55,15 +56,25 @@
                                     <a href="#" class="btn btn-warning btn-circle btn-sm mr-1">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                    <a th:href="@{/Paciente/Eliminar/{id}(id=${mascota.idPaciente}, idCliente=${idCliente})}" 
+                                       class="btn btn-danger btn-circle btn-sm"
+                                       onclick="return confirm('¿Está seguro de eliminar esta mascota?');">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
+                            </tr>
+                            <tr th:if="${#lists.isEmpty(listaMascotas)}">
+                                <td colspan="6" class="text-center">Este cliente no tiene mascotas registradas.</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+        </div>
+        <div class="mt-3">
+            <a th:href="@{/Cliente/Listarcliente}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Volver a Clientes
+            </a>
         </div>
     </div>
 </body>

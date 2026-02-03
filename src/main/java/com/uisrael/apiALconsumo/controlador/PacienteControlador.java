@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,6 +41,7 @@ public class PacienteControlador {
 		return "Paciente/Crearpaciente";
 	}
 	
+	
 	@GetMapping("/Mostrarpaciente")
 	public String Mostrarpaciente(@RequestParam int idCliente, Model model) {
 		model.addAttribute("idCliente", idCliente);
@@ -50,11 +52,23 @@ public class PacienteControlador {
 		model.addAttribute("listaMascotas", filtradas);
 		return "Paciente/Mostrarpaciente";
 	}
+	
 
 	@PostMapping("/Guardar")
 	public String Guardarpaciente(@ModelAttribute PacienteRequestDTO paciente) {
 		servicioPaciente.crearPaciente(paciente);
 		int id = (paciente.getFkCliente() != null) ? paciente.getFkCliente().getIdCliente() : 0;
 		return "redirect:/Paciente/Mostrarpaciente?idCliente=" + id;
+	}
+	
+	
+	@GetMapping("/Eliminar/{id}")
+	public String eliminarPaciente(@PathVariable int id, @RequestParam(required = false) Integer idCliente) {
+	    servicioPaciente.eliminarPaciente(id);
+	    if (idCliente != null) {
+	        return "redirect:/Paciente/Mostrarpaciente?idCliente=" + idCliente;
+	    } else {
+	        return "redirect:/Paciente/Listarpaciente"; 
+	    }
 	}
 }

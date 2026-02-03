@@ -30,5 +30,9 @@ public class PacienteServicioImpl implements IPacienteServicio{
 		webcliente.post().uri("/pacientes").bodyValue(dto).retrieve().toBodilessEntity().block();
 		
 	}
+	@Override
+	public void eliminarPaciente(int id) {
+	    webcliente.delete().uri("/pacientes/{id}", id).retrieve().toBodilessEntity().block();
+	}
 
 }
