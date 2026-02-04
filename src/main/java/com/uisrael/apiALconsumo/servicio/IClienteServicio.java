@@ -9,4 +9,5 @@ public interface IClienteServicio {
     public void crearCliente(ClienteRequestDto dto);
     public void eliminarCliente(int id);
     ClienteResponseDto obtenerPorId(int id);
+    ClienteResponseDto buscarPorId(int idCliente);
 }

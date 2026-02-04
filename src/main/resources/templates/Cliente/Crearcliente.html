@@ -19,6 +19,8 @@
             </div>
             <div class="card-body">
                 <form th:action="@{/Cliente/Guardar}" th:object="${cliente}" method="post">
+                  
+                        <input type="hidden" class="form-control" th:field="*{idCliente}" required>
                     
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">

@@ -48,8 +48,10 @@
                                         <span class="text">Mascotas</span>
                                     </a>
 
-                                    <a href="#" class="btn btn-warning btn-circle btn-sm mr-1" title="Editar">
-                                        <i class="fas fa-pencil-alt"></i>
+                                    <a th:href="@{/Cliente/buscar/{idCliente}(idCliente=${clienterecorrido.idCliente})}" 
+                                    			class="btn btn-warning btn-circle btn-sm mr-1" 
+                                    			title="Editar">
+                                        		<i class="fas fa-pencil-alt"></i>
                                     </a>
 
                                     <a th:href="@{/Cliente/Eliminar/{id}(id=${clienterecorrido.idCliente})}" 

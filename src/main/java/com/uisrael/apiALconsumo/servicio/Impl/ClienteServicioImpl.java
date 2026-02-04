@@ -34,4 +34,12 @@ public class ClienteServicioImpl implements IClienteServicio {
     public ClienteResponseDto obtenerPorId(int id) {
         return webcliente.get().uri("/clientes/{id}", id).retrieve().bodyToMono(ClienteResponseDto.class).block();
     }
+
+	@Override
+	public ClienteResponseDto buscarPorId(int idCliente) {
+		return webcliente.get().uri(uriBuilder -> uriBuilder.path("/clientes/buscarid/{idCliente}")
+				.build(idCliente)).retrieve().bodyToMono(ClienteResponseDto.class).block();
+	}
+    
+    
 }

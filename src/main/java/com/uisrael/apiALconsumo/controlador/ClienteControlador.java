@@ -40,4 +40,10 @@ public class ClienteControlador {
         servicioCliente.eliminarCliente(id);
         return "redirect:/Cliente/Listarcliente";
     }
+    
+    @GetMapping("/buscar/{idCliente}")
+    public String editarCliente(@PathVariable int idCliente, Model model) {
+    	model.addAttribute("cliente",servicioCliente.buscarPorId(idCliente));
+		return "Cliente/Crearcliente";
+    }
 }
