@@ -4,6 +4,7 @@
       layout:decorate="~{Plantilla/plantillaui}">
 
 <head>
+    <meta charset="utf-8">
     <title>Agendar Cita - Animal Life</title>
 </head>
 
@@ -12,71 +13,87 @@
         
         <h1 class="h3 mb-4 text-gray-800">Agendar Nueva Cita</h1>
 
-        <div class="row">
-            <div class="col-lg-8">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Detalles de la Cita Médica</h6>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form th:action="@{/Cita/Guardar}" th:object="${cita}" method="post">
+                            
+                            <div class="card bg-light mb-4 border-left-primary">
+                                <div class="card-body">
+                                    <div class="row" th:if="${nombreMascota != null}">
+                                        <div class="col-md-6">
+                                            <label class="font-weight-bold text-primary">Paciente / Mascota:</label>
+                                            <input type="hidden" th:field="*{fkPaciente.idPaciente}" />
+                                            <p class="h5 text-gray-800" th:text="${nombreMascota}"></p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="font-weight-bold text-primary">Propietario:</label>
+                                            <p class="h5 text-gray-800" th:text="${nombreDuenio}"></p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div th:if="${nombreMascota == null}">
+                                        <label class="font-weight-bold text-primary">Seleccionar Paciente:</label>
+                                        <select class="form-control" th:field="*{fkPaciente.idPaciente}" required>
+                                            <option value="">-- Seleccione Mascota --</option>
+                                            <option th:each="p : ${listaPacientes}" 
+                                                    th:value="${p.idPaciente}" 
+                                                    th:text="${p.nombre}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <label class="font-weight-bold">Fecha y Hora:</label>
-                                    <input type="datetime-local" class="form-control">
+                                    <label class="font-weight-bold">Fecha y Hora de la Cita:</label>
+                                    <input type="datetime-local" class="form-control" th:field="*{fecha_Hora}" required>
                                 </div>
-                                <div class="col-sm-6">
-                                    <label class="font-weight-bold">Servicio:</label>
-                                    <select class="form-control" id="servicio">
-                                        <option selected disabled>Seleccione un servicio...</option>
-                                        <option>Consulta General</option>
-                                        <option>Vacunación</option>
-                                        <option>Cirugía</option>
-                                        <option>Peluquería</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="font-weight-bold">Buscar Propietario (Cliente):</label>
-                                <input type="text" class="form-control" list="listaClientes" id="clienteInput" placeholder="Escriba nombre o cédula para buscar...">
                                 
-                                <datalist id="listaClientes">
-                                    <option value="Juan Pérez (172xxxxxxx)">
-                                    <option value="María García (050xxxxxxx)">
-                                    <option value="Carlos Andrade (171xxxxxxx)">
-                                    <option value="Lucía Fernández (092xxxxxxx)">
-                                </datalist>
-                               
-                            </div>
-
-                            <div class="form-group">
-                                <label class="font-weight-bold">Seleccionar Paciente (Mascota):</label>
-                                <select class="form-control" id="pacienteSeleccion">
-                                    <option selected disabled>Primero seleccione un cliente...</option>
+                                <div class="col-sm-6">
+                                    <label class="font-weight-bold">Veterinario Responsable:</label>
+                                    <select class="form-control" name="fkVeterinario.idveterinario" required>
+                                        <option value="">Seleccionar médico...</option>
+                                        <option th:each="v : ${listaVeterinarios}" 
+                                                th:value="${v.idveterinario}" 
+                                                th:text="${v.nombre} + ' ' + ${v.apellido}"></option>
                                     </select>
+                                </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">Veterinario Responsable:</label>
-                                <select class="form-control" id="veterinario">
-                                    <option selected disabled>Seleccionar médico disponible...</option>
-                                    <option>Dr. Ricardo Smith</option>
-                                    <option>Dra. Ana López</option>
+                                <label class="font-weight-bold">Servicios a realizar:</label>
+                                <select class="form-control select-multiple" 
+                                        name="servicios" 
+                                        multiple="multiple" 
+                                        required>
+                                    <option th:each="s : ${listaServicios}" 
+                                            th:value="${s.idservicio}" 
+                                            th:text="${s.nombre_ser}"></option>
                                 </select>
+                                <small class="text-muted">Haga clic para buscar y seleccionar múltiples servicios.</small>
                             </div>
 
                             <hr>
-                            <button type="button" class="btn btn-primary btn-icon-split">
-                                <span class="icon text-white-50"><i class="fas fa-check"></i></span>
-                                <span class="text">Agendar Cita</span>
-                            </button>
+                            <div class="d-flex justify-content-between">
+                                <a th:href="@{/Paciente/Listar}" class="btn btn-secondary btn-icon-split shadow-sm">
+                                    <span class="icon text-white-50"><i class="fas fa-arrow-left"></i></span>
+                                    <span class="text">Regresar</span>
+                                </a>
+                                <button type="submit" class="btn btn-primary btn-icon-split shadow-sm">
+                                    <span class="icon text-white-50"><i class="fas fa-check"></i></span>
+                                    <span class="text">Agendar Cita</span>
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-
-        </div> 
+    </div> 
 </body>
 </html>

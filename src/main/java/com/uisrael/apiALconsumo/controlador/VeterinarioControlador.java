@@ -38,9 +38,10 @@ public class VeterinarioControlador {
   		servicioVeterinario.crearVeterinario(veterinario);
   		return "redirect:/Veterinario/Listarveterinario";
   	}
+  	
   	@GetMapping("/Eliminar/{id}")
-    public String eliminarCliente(@PathVariable int id) {
-        servicioVeterinario.eliminarVeterinario(id);
-        return "redirect:/Veterinario/Listarveterinario";
-    }
+	public String eliminarVeterinario(@PathVariable int id) {
+		servicioVeterinario.eliminarVeterinario(id);
+		return "redirect:/Veterinario/Listarveterinario";
+	}
 }

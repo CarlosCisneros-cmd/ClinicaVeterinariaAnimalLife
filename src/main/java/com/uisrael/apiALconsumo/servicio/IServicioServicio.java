@@ -9,5 +9,5 @@ public interface IServicioServicio {
 	
 	public List<ServicioResponseDto>listarServicio();
 	public void crearServicio(ServicioRequestDto dto);
-
+	void eliminarServicio(int id);
 }

@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/login")
 public class LoginControlador {
 
-    // MOSTRAR LOGIN
+    
     @GetMapping
     public String mostrarLogin() {
-        return "Login/login"; // templates/Login/Login.html
+        return "Login/login"; 
     }
 
-    // PROCESAR LOGIN
+   
     @PostMapping
     public String procesarLogin(
             @RequestParam String username,
@@ -23,7 +23,7 @@ public class LoginControlador {
             Model model,
             HttpSession session) {
 
-        // VALIDACIÓN (temporal)
+    
         if ("admin".equals(username) && "1234".equals(password)) {
             session.setAttribute("usuario", username);
             return "redirect:/PaginaPrincipal";

@@ -12,5 +12,6 @@ public class ClienteResponseDto {
 	private String correo;
 	private String cedula;
 	private String direccion;
+	private boolean estado;
 
 }

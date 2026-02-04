@@ -12,21 +12,26 @@ import com.uisrael.apiALconsumo.servicio.IServicioServicio;
 @Service
 public class ServicioServicioImpl implements IServicioServicio{
 	
-	private final WebClient webClient;
+	private final WebClient webcliente;
 
     
     public ServicioServicioImpl(WebClient webClient) {
-        this.webClient = webClient;
+        this.webcliente = webClient;
     }
 
     @Override
     public List<ServicioResponseDto> listarServicio() {
-        return webClient.get().uri("/servicios").retrieve().bodyToFlux(ServicioResponseDto.class).collectList().block();
+        return webcliente.get().uri("/servicios").retrieve().bodyToFlux(ServicioResponseDto.class).collectList().block();
     }
 
     @Override
     public void crearServicio(ServicioRequestDto dto) {
-        webClient.post().uri("/servicios").bodyValue(dto).retrieve().toBodilessEntity().block();
+        webcliente.post().uri("/servicios").bodyValue(dto).retrieve().toBodilessEntity().block();
     }
 
+    @Override
+    public void eliminarServicio(int id) {
+        
+        webcliente.delete().uri("/servicios/{id}", id).retrieve().toBodilessEntity().block();
+    }
 }

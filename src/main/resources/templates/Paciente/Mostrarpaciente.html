@@ -32,32 +32,48 @@
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Raza</th>
-                                <th>Sexo</th>
                                 <th>Especie</th>
-                                <th>Dueño</th>
+                                <th>Raza</th>
+                                <th>Color</th>
+                                <th>F. Nacimiento</th>
                                 <th class="text-center">Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="mascota : ${listaMascotas}">
                                 <td th:text="${mascota.nombre}"></td>
-                                <td th:text="${mascota.raza}"></td>
-                                <td th:text="${mascota.sexo}"></td>
                                 <td th:text="${mascota.especie}"></td>
-                                <td th:text="${mascota.fkCliente != null ? mascota.fkCliente.nombres + ' ' + mascota.fkCliente.apellidos : 'No asignado'}"></td>
+                                <td th:text="${mascota.raza}"></td>
+                                <td th:text="${mascota.color}"></td>
+                                <td th:text="${mascota.fechaNacimiento != null ? #temporals.format(mascota.fechaNacimiento, 'dd/MM/yyyy') : '---'}"></td>
                                 
                                 <td class="text-center"> 
-                                    <a th:href="@{/Cabecera/Mostrar(idPaciente=${mascota.idPaciente}, nombrePac=${mascota.nombre}, nombreCli=${mascota.fkCliente.nombres + ' ' + mascota.fkCliente.apellidos})}"
-                                    	class="btn btn-info btn-icon-split btn-sm mr-2">
+                                    <a th:if="${mascota.fkCliente != null}"
+                                       th:href="@{/Cita/Nuevo(idPaciente=${mascota.idPaciente})}" 
+                                       class="btn btn-primary btn-icon-split btn-sm mr-2 shadow-sm">
+                                        <span class="icon text-white-50"><i class="fas fa-calendar-alt"></i></span>
+                                        <span class="text">Agendar Cita</span>
+                                    </a>
+
+                                    <a th:href="@{/Cabecera/Mostrar(
+                                            idPaciente=${mascota.idPaciente}, 
+                                            nombrePac=${mascota.nombre}, 
+                                            nombreCli=${mascota.fkCliente != null ? (mascota.fkCliente.nombres + ' ' + mascota.fkCliente.apellidos) : 'INACTIVO'}
+                                       )}"
+                                    	class="btn btn-info btn-icon-split btn-sm mr-2 shadow-sm">
                                         <span class="icon text-white-50"><i class="fas fa-arrow-right"></i></span>
                                         <span class="text">Historial</span>
                                     </a>
-                                    <a href="#" class="btn btn-warning btn-circle btn-sm mr-1">
+
+                                    <a th:href="@{/Paciente/Editar/{id}(id=${mascota.idPaciente}, idCliente=${idCliente})}" 
+                                       class="btn btn-warning btn-circle btn-sm mr-2 shadow-sm" 
+                                       title="Editar Mascota">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
+
                                     <a th:href="@{/Paciente/Eliminar/{id}(id=${mascota.idPaciente}, idCliente=${idCliente})}" 
-                                       class="btn btn-danger btn-circle btn-sm"
+                                       class="btn btn-danger btn-circle btn-sm shadow-sm" 
+                                       title="Eliminar Mascota"
                                        onclick="return confirm('¿Está seguro de eliminar esta mascota?');">
                                         <i class="fas fa-trash"></i>
                                     </a>
@@ -71,9 +87,11 @@
                 </div>
             </div>
         </div>
+        
         <div class="mt-3">
-            <a th:href="@{/Cliente/Listarcliente}" class="btn btn-secondary">
-                <i class="fas fa-arrow-left"></i> Volver a Clientes
+            <a th:href="@{/Cliente/Listarcliente}" class="btn btn-secondary btn-icon-split shadow-sm">
+                <span class="icon text-white-50"><i class="fas fa-arrow-left"></i></span>
+                <span class="text">Volver a Clientes</span>
             </a>
         </div>
     </div>

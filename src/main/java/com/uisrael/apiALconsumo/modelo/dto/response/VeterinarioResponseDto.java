@@ -10,6 +10,7 @@ public class VeterinarioResponseDto {
 	private String apellido;
 	private String cedula;
 	private String correo;
+	private boolean estado;
 	
 
 }

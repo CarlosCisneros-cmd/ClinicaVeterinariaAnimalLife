@@ -27,19 +27,19 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Dirección</th>
-                                <th>Teléfono</th>
+                                <th>Nombre Completo</th>
                                 <th>Cédula</th>
+                                <th>Teléfono</th>
+                                <th>Dirección</th>
                                 <th class="text-center">Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="clienterecorrido : ${listarclientes}">
                                 <td th:text="${clienterecorrido.nombres} + ' ' + ${clienterecorrido.apellidos}"></td>
-                                <td th:text="${clienterecorrido.direccion}"></td>
-                                <td th:text="${clienterecorrido.telefono}"></td>
                                 <td th:text="${clienterecorrido.cedula}"></td>
+                                <td th:text="${clienterecorrido.telefono}"></td>
+                                <td th:text="${clienterecorrido.direccion}"></td>
                                 <td class="text-center"> 
                                     
                                     <a th:href="@{/Paciente/Mostrarpaciente(idCliente=${clienterecorrido.idCliente})}" 
@@ -55,14 +55,14 @@
                                     <a th:href="@{/Cliente/Eliminar/{id}(id=${clienterecorrido.idCliente})}" 
                                        class="btn btn-danger btn-circle btn-sm"
                                        title="Eliminar Cliente"
-                                       onclick="return confirm('¿Está seguro de eliminar este cliente? Esta acción no se puede deshacer.');">
+                                       onclick="return confirm('¿Está seguro de eliminar este cliente?');">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
                             </tr>
                             
                             <tr th:if="${#lists.isEmpty(listarclientes)}">
-                                <td colspan="5" class="text-center">No se encontraron clientes en el sistema.</td>
+                                <td colspan="5" class="text-center">No hay clientes activos en el sistema.</td>
                             </tr>
                         </tbody>
                     </table>

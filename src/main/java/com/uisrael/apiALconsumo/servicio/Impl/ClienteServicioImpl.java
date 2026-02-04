@@ -30,4 +30,8 @@ public class ClienteServicioImpl implements IClienteServicio {
     public void eliminarCliente(int id) {
         webcliente.delete().uri("/clientes/{id}", id) .retrieve().toBodilessEntity().block();
     }
+    @Override
+    public ClienteResponseDto obtenerPorId(int id) {
+        return webcliente.get().uri("/clientes/{id}", id).retrieve().bodyToMono(ClienteResponseDto.class).block();
+    }
 }

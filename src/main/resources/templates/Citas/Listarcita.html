@@ -4,93 +4,89 @@
       layout:decorate="~{Plantilla/plantillaui}">
 
 <head>
+    <meta charset="utf-8">
     <title>Listado de Citas - Animal Life</title>
 </head>
 
 <body>
     <div layout:fragment="contenido">
         
-        <h1 class="h3 mb-4 text-gray-800">Gestión de Citas Médicas</h1>
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Gestión de Citas Médicas</h1>
+            <a th:href="@{/Paciente/Listarpaciente}" class="btn btn-success btn-sm shadow-sm">
+                <i class="fas fa-plus fa-sm text-white-50"></i> Nueva Cita
+            </a>
+        </div>
 
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-filter"></i> Filtros de Búsqueda</h6>
-            </div>
+        <div class="card shadow mb-4 border-left-info">
             <div class="card-body">
-                <form class="row">
-                    <div class="col-md-3 mb-3">
-                        <label>Ver por Mes:</label>
-                        <select class="form-control">
-                            <option>Todos los meses</option>
-                            <option>Enero</option>
-                            <option>Febrero</option>
-                            <option>Marzo</option>
-                            <option>Abril</option>
-                            <option>Mayo</option>
-                            <option>Junio</option>
-                            <option>Julio</option>
-                            <option>Agosto</option>
-                            <option>Septiembre</option>
-                            <option>Octubre</option>
-                            <option>Noviembre</option>
-                            <option>Diciembre</option>
-                            
-                            </select>
+                <form th:action="@{/Cita/Listarcita}" method="get" class="form-inline">
+                    <div class="form-group mb-2">
+                        <label class="mr-3 font-weight-bold text-gray-800">Filtrar por Fecha:</label>
+                        <input type="date" name="fechaFiltro" th:value="${fechaSeleccionada}" class="form-control shadow-sm">
                     </div>
-
-                    <div class="col-md-3 mb-3">
-                        <label>Día Específico:</label>
-                        <input type="date" class="form-control">
-                    </div>
-
-                    <div class="col-md-3 mb-3">
-                        <label>Veterinario:</label>
-                        <select class="form-control">
-                            <option>Todos los médicos</option>
-                            <option>Dr. Ricardo Smith</option>
-                            <option>Dra. Ana López</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-3 mb-3 d-flex align-items-end">
-                        <button type="button" class="btn btn-primary btn-block">
-                            <i class="fas fa-search fa-sm"></i> Aplicar Filtros
-                        </button>
-                    </div>
+                    <button type="submit" class="btn btn-primary mb-2 ml-3 shadow-sm">
+                        <i class="fas fa-search fa-sm"></i> Buscar
+                    </button>
+                    <a th:href="@{/Cita/Listarcita}" class="btn btn-secondary mb-2 ml-2 shadow-sm">
+                        <i class="fas fa-undo fa-sm"></i> Mostrar Todas
+                    </a>
                 </form>
             </div>
         </div>
 
         <div class="card shadow mb-4">
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Calendario de Consultas Encontradas</h6>
-                <a th:href="@{/Cita}" class="btn btn-success btn-sm shadow-sm">
-                    <i class="fas fa-plus fa-sm text-white-50"></i> Nueva Cita
-                </a>
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Calendario de Consultas Programadas</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover" width="100%" cellspacing="0">
-                        <thead class="thead-light">
+                    <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                        <thead class="thead-light text-dark">
                             <tr>
                                 <th>Fecha y Hora</th>
-                                <th>Paciente (Mascota)</th>
+                                <th>Mascota</th>
                                 <th>Propietario</th>
                                 <th>Veterinario</th>
-                                <th>Servicio</th>
+                                <th>Servicios</th>
                                 <th class="text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>2024-05-20 | 10:30</td>
-                                <td>Firulais</td>
-                                <td>Carlos Cisneros</td>
-                                <td>Dr. Quiñonez</td>
-                                <td>Vacunación</td>
+                            <tr th:each="c : ${listacitas}">
+                                <td class="font-weight-bold" 
+                                    th:text="${c.fecha_Hora != null ? #temporals.format(c.fecha_Hora, 'dd/MM/yyyy | HH:mm') : '---'}">
+                                </td>
+                                
+                                <td th:text="${c.fkPaciente?.nombre}"></td>
+                                
+                                <td th:text="${c.fkPaciente?.fkCliente?.nombres + ' ' + c.fkPaciente?.fkCliente?.apellidos}"></td>
+                                
+                                <td th:text="${c.fkVeterinario?.nombre} + ' ' + ${c.fkVeterinario?.apellido}"></td>
+                                
+                                <td>
+                                    <span th:each="s : ${c.servicios}" 
+                                          class="badge badge-info mr-1 shadow-sm" 
+                                          th:text="${s.nombre_ser}"></span>
+                                </td>
+                                
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-info btn-circle btn-sm"><i class="fas fa-edit"></i></a>
-                                    <a href="#" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>
+                                    <a href="#" class="btn btn-warning btn-circle btn-sm shadow-sm" title="Editar">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                    
+                                    <a th:href="@{/Cita/Eliminar/{id}(id=${c.idCita})}" 
+                                       class="btn btn-danger btn-circle btn-sm shadow-sm" 
+                                       title="Eliminar"
+                                       onclick="return confirm('¿Está seguro de que desea cancelar esta cita? esta acción realizará un borrado lógico.')">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            
+                            <tr th:if="${listacitas == null || listacitas.empty}">
+                                <td colspan="6" class="text-center text-muted py-4">
+                                    <i class="fas fa-info-circle"></i> No se encontraron citas para los criterios seleccionados.
                                 </td>
                             </tr>
                         </tbody>
@@ -100,5 +96,11 @@
         </div>
 
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        });
+    </script>
 </body>
 </html>

@@ -25,24 +25,36 @@
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label>Nombre</label>
-                            <input type="text" class="form-control" placeholder="Ej: Estrella" th:field="*{nombre}">
+                            <input type="text" class="form-control" placeholder="Ej: Estrella" th:field="*{nombre}" required>
                         </div>
                         <div class="col-sm-6">
                             <label>Especie</label>
-                            <input type="text" class="form-control" placeholder="Ej: Perro" th:field="*{especie}">
+                            <input type="text" class="form-control" placeholder="Ej: Perro" th:field="*{especie}" required>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label>Raza</label>
-                            <input type="text" class="form-control" placeholder="Ej: Pequines" th:field="*{raza}">
+                            <input type="text" class="form-control" placeholder="Ej: Pequines" th:field="*{raza}" required>
                         </div>
                         <div class="col-sm-6">
                             <label>Sexo</label>
-                            <input type="text" class="form-control" placeholder="Ej: Hembra" th:field="*{sexo}">
+                            <input type="text" class="form-control" placeholder="Ej: Hembra" th:field="*{sexo}" required>
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <label>Color</label>
+                            <input type="text" class="form-control" placeholder="Ej: Café con manchas" th:field="*{color}" required>
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Fecha de Nacimiento</label>
+                            <input type="date" class="form-control" th:field="*{fechaNacimiento}" required>
+                        </div>
+                    </div>
+                    
                     <hr>
 
                     <button type="submit" class="btn btn-primary btn-icon-split">

@@ -1,6 +1,8 @@
 package com.uisrael.apiALconsumo.modelo.dto.request;
 
 
+import java.time.LocalDate;
+
 import lombok.Data;
 
 @Data
@@ -10,6 +12,8 @@ public class PacienteRequestDTO {
 	private String raza;
 	private String sexo;
 	private String especie;
+	private String color;
+    private LocalDate fechaNacimiento;
 	private ClienteRequestDto fkCliente;
 	
 }

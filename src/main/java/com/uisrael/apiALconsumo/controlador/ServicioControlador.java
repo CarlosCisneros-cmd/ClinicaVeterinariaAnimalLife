@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -43,6 +44,12 @@ public class ServicioControlador {
     @PostMapping("/guardar")
     public String guardarServicio(@ModelAttribute ServicioRequestDto servicio) {
         servicioService.crearServicio(servicio);
+        return "redirect:/servicio/listar";
+    }
+    
+    @GetMapping("/eliminar/{id}")
+    public String eliminarServicio(@PathVariable int id) {
+        servicioService.eliminarServicio(id);
         return "redirect:/servicio/listar";
     }
 }
