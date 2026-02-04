@@ -50,6 +50,12 @@ public class ClienteController {
 		clienteUseCase.eliminar(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@GetMapping("buscarid/{idCliente}")
+	public ClienteResponseDto buscarPorId(@PathVariable int idCliente) {
+		return mapper.toResponseDto(clienteUseCase.obtenerPorId(idCliente));
+		
+	}
 }
 	
 		
