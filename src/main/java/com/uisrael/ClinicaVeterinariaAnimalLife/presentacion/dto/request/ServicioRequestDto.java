@@ -9,6 +9,6 @@ public class ServicioRequestDto {
 	@NotBlank
 	private String nombre_ser;
 	
-	private CitasRequestDto fkCita;
+
 
 }

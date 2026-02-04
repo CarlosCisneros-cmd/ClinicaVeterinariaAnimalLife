@@ -2,7 +2,10 @@ package com.uisrael.ClinicaVeterinariaAnimalLife.infraestructura.persistencia.jp
 
 import java.io.Serializable;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,6 +17,8 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="clientes")
+@SQLDelete(sql = "UPDATE clientes SET estado = false WHERE id_cliente = ?")
+@SQLRestriction("estado = true")
 
 public class ClientesJpa implements Serializable{
 
@@ -28,7 +33,8 @@ public class ClientesJpa implements Serializable{
 	 private String correo;
 	 private String cedula;
 	 private String direccion;
-	
+	 @Column(nullable = false)
+	  private boolean estado = true;
 	
 	 
 	 

@@ -1,5 +1,7 @@
 package com.uisrael.ClinicaVeterinariaAnimalLife.presentacion.dto.request;
 
+import java.time.LocalDate;
+
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -16,6 +18,10 @@ public class PacienteRequestDTO {
 	private String sexo;
 	@NotBlank
 	private String especie;
+	
+    private String color;
+    
+    private LocalDate fechaNacimiento;
 	
 	private ClienteRequestDto fkCliente;
 	

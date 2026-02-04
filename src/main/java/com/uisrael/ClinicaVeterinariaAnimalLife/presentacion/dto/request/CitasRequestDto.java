@@ -1,23 +1,26 @@
 package com.uisrael.ClinicaVeterinariaAnimalLife.presentacion.dto.request;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-import jakarta.validation.constraints.NotBlank;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class CitasRequestDto {
 	private int idCita;
 
-    @NotBlank
+	@NotNull
     private PacienteRequestDTO fkPaciente;
 
-    @NotBlank
+    @NotNull
     private VeterinarioRequestDto fkVeterinario;
 
-    @NotBlank
+    @NotNull
     private LocalDateTime fecha_Hora;
+    
+    private List<Integer> servicios;
 	
 
 }

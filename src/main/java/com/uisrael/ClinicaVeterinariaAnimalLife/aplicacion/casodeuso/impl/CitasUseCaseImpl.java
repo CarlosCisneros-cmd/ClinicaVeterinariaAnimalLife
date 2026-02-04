@@ -35,8 +35,7 @@ public class CitasUseCaseImpl implements ICitaUseCase{
 
 	@Override
 	public void eliminar(int id) {
-		repositorio.eliminar(id);
-		
+	    repositorio.eliminar(id);
 	}
 	@Override
 	public List<Citas> buscarPorRango(LocalDateTime inicio, LocalDateTime fin) {

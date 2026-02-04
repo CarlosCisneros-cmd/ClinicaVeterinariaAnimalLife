@@ -2,18 +2,23 @@ package com.uisrael.ClinicaVeterinariaAnimalLife.infraestructura.persistencia.jp
 
 import java.io.Serializable;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+
 import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name ="servicio")
+@SQLDelete(sql = "UPDATE servicio SET estado = false WHERE idservicio = ?")
+@SQLRestriction("estado = true")
 public class ServicioJpa implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -22,11 +27,10 @@ public class ServicioJpa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idservicio;
 	private String nombre_ser;
+	@Column(nullable = false) 
+    private boolean estado = true;
 	
-	
-	@ManyToOne
-	@JoinColumn(name = "id_Cita")
-	private CitasJpa fkCita;
+
 	
 	
 

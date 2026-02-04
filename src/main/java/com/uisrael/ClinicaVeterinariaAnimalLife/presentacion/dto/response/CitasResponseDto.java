@@ -1,6 +1,7 @@
 package com.uisrael.ClinicaVeterinariaAnimalLife.presentacion.dto.response;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.Data;
 
@@ -12,5 +13,7 @@ public class CitasResponseDto {
 	private PacienteResponseDTO fkPaciente;    
     private VeterinarioResponseDto fkVeterinario; 
     private LocalDateTime fecha_Hora; 
+    private boolean estado;
+    private List<ServicioResponseDto> servicios;
 }
 
