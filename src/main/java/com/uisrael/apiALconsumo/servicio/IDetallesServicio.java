@@ -10,5 +10,7 @@ public interface IDetallesServicio {
 	
 	public List<DetallesResponseDto>listarDetalles();
 	public void crearDetalles(DetallesRequestDto dto);
+	public DetallesResponseDto buscarPorId(int id);
+	public void eliminarDetalle(int id);
 
 }

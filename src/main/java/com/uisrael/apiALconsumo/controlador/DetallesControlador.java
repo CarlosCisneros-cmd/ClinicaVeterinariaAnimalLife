@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -44,6 +45,13 @@ public class DetallesControlador {
     public String guardarDetalle(@ModelAttribute DetallesRequestDto detalle) {
         detallesService.crearDetalles(detalle);
         return "redirect:/detalles/listar";
+    }
+    
+    @GetMapping("/ver/{id}")
+    public String verDetalle(@PathVariable("id") int id, Model model) {
+        DetallesResponseDto detalle = detallesService.buscarPorId(id);
+        model.addAttribute("detalle", detalle);
+        return "Detalles/Mostrardetalles";
     }
 
 }

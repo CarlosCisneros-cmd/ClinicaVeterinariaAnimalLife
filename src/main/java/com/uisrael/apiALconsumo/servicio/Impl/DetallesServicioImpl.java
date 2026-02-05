@@ -35,5 +35,16 @@ public class DetallesServicioImpl implements IDetallesServicio {
         public DetallesResponseDto buscarDetallePorId(Integer id) {
             return webClient.get().uri("/detalles/{id}", id).retrieve().bodyToMono(DetallesResponseDto.class).block();
         }
+        @Override
+        public DetallesResponseDto buscarPorId(int id) {
+            return webClient.get().uri("/detalles/{id}", id).retrieve().bodyToMono(DetallesResponseDto.class).block();
+        }
+		@Override
+		public void eliminarDetalle(int id) {
+			// TODO Auto-generated method stub
+			
+		}
+			
+			
 
 }

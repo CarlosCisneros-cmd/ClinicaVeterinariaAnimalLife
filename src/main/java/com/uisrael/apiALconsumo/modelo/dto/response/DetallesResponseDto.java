@@ -11,6 +11,8 @@ public class DetallesResponseDto {
 	private  String Descripcion;
 	private  String Diagnostico;
 	private  String Analisis;
+	private double Peso;
+	private double Temperatura;
 	private LocalDateTime fechaCreacion;
 
 }
