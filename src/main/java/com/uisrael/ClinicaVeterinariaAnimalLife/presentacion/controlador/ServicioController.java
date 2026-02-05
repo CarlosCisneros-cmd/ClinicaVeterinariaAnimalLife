@@ -48,4 +48,9 @@ public class ServicioController {
 		return ResponseEntity.noContent().build();
 	}
 
+	@GetMapping("buscarid/{idServicio}")
+	public ServicioResponseDto buscarPorId(@PathVariable int idServicio) {
+		return mapper.toResponseDto(servicioUseCase.obtenerPorId(idServicio));
+		
+	}
 }

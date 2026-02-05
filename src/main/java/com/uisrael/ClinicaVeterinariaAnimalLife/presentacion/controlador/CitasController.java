@@ -83,4 +83,10 @@ public class CitasController {
 	    return ResponseEntity.ok(lista);
 	}
 	
+	@GetMapping("buscarid/{idCita}")
+	public CitasResponseDto buscarPorId(@PathVariable int idCita) {
+		return mapper.toResponseDto(citaUseCase.obtenerPorId(idCita));
+		
+	}
+	
 }

@@ -86,6 +86,12 @@ public class PacienteController {
 	public ResponseEntity<PacienteResponseDTO> obtenerPorId(@PathVariable int id) {
 	    return ResponseEntity.ok(mapper.toResponseDto(pacienteUseCase.obtenerPoriD(id)));
 	}
+	
+	@GetMapping("buscarid/{idPaciente}")
+	public PacienteResponseDTO buscarPorId(@PathVariable int idPaciente) {
+		return mapper.toResponseDto(pacienteUseCase.obtenerPoriD(idPaciente));
+		
+	}
 }
 	
 		

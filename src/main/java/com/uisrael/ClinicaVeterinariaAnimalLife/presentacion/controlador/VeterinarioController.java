@@ -58,4 +58,10 @@ public class VeterinarioController {
 	            .toList();
 	    return ResponseEntity.ok(lista);
 	}
+	
+	@GetMapping("buscarid/{idVeterinario}")
+	public VeterinarioResponseDto buscarPorId(@PathVariable int idVeterinario) {
+		return mapper.toResponseDto(veterinarioUseCase.obtenerPorId(idVeterinario));
+		
+	}
 }
