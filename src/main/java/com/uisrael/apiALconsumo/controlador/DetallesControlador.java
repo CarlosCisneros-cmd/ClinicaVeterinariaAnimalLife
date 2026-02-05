@@ -1,18 +1,24 @@
 package com.uisrael.apiALconsumo.controlador;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.uisrael.apiALconsumo.modelo.dto.request.CabeceraRequestDto;
 
 import com.uisrael.apiALconsumo.modelo.dto.request.DetallesRequestDto;
+
 import com.uisrael.apiALconsumo.modelo.dto.response.DetallesResponseDto;
+
 import com.uisrael.apiALconsumo.servicio.IDetallesServicio;
 
 @Controller
@@ -22,36 +28,41 @@ public class DetallesControlador {
 	@Autowired
     private IDetallesServicio detallesService;
 
-    @GetMapping({"/", ""}) 
-    public String inicioDetalles() {
-        return "redirect:/detalles/listar"; 
-    }
-
     @GetMapping("/listar")
-    public String listarDetalles(Model model) {
-        List<DetallesResponseDto> lista = detallesService.listarDetalles();
-        model.addAttribute("listardetalles", lista);
+    public String listarDetalles(@RequestParam int idCabecera, Model model) {
+    	model.addAttribute("idCabecera", idCabecera);
+		List<DetallesResponseDto> todosDetalles = detallesService.listarDetalles();
+		List<DetallesResponseDto> filtradas = todosDetalles.stream()
+			.filter(p -> p.getFkCabecera() != null && p.getFkCabecera().getIdCabecera() == idCabecera)
+			.collect(Collectors.toList());
+		model.addAttribute("listardetalles", filtradas);
         return "Detalles/Listardetalles";
     }
 
     @GetMapping("/nuevo") 
-    public String formularioNuevo(Model model) {
-        model.addAttribute("detalle", new DetallesRequestDto());
-        return "Detalles/Guardardetalles"; 
+    public String formularioNuevo(@RequestParam int idCabecera, Model model) {
+    	DetallesRequestDto nuevo = new DetallesRequestDto();
+        nuevo.setFkCabecera(new CabeceraRequestDto());
+        nuevo.getFkCabecera().setIdCabecera(idCabecera);
+        model.addAttribute("detalle", nuevo);
+        model.addAttribute("idCabecera", idCabecera);
+        return "Detalles/Guardardetalles";
+       
     }
 
     
     @PostMapping("/guardar")
-    public String guardarDetalle(@ModelAttribute DetallesRequestDto detalle) {
+    public String guardarDetalle(DetallesRequestDto detalle, @RequestParam int idCabecera) {
+    	if(detalle.getFkCabecera() == null) {
+            detalle.setFkCabecera(new CabeceraRequestDto());
+        }
+        detalle.getFkCabecera().setIdCabecera(idCabecera);
+        
         detallesService.crearDetalles(detalle);
-        return "redirect:/detalles/listar";
+        
+        return "redirect:/detalles/listar?idCabecera=" + idCabecera;
     }
     
-    @GetMapping("/ver/{id}")
-    public String verDetalle(@PathVariable("id") int id, Model model) {
-        DetallesResponseDto detalle = detallesService.buscarPorId(id);
-        model.addAttribute("detalle", detalle);
-        return "Detalles/Mostrardetalles";
-    }
+    
 
 }

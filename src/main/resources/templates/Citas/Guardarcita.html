@@ -22,7 +22,7 @@
                     <div class="card-body">
                         <form th:action="@{/Cita/Guardar}" th:object="${cita}" method="post">
                             
-                            <input type="hidden"  th:field="*{idCita}">
+                            <input type="hidden" th:field="*{idCita}">
                             
                             <div class="card bg-light mb-4 border-left-primary">
                                 <div class="card-body">
@@ -58,13 +58,13 @@
                                 
                                 <div class="col-sm-6">
                                     <label class="font-weight-bold">Veterinario Responsable:</label>
-                                    <select class="form-control" name="*{fkVeterinario.idveterinario}" required>
+                                    <select class="form-control" name="fkVeterinario.idveterinario" required>
                                         <option value="">Seleccionar médico...</option>
                                         <option th:each="v : ${listaVeterinarios}" 
                                                 th:value="${v.idveterinario}" 
                                                 th:text="${v.nombre} + ' ' + ${v.apellido}"></option>
                                     </select>
-                                </div>
+                                </div>	
                             </div>
 
                             <div class="form-group">
@@ -81,12 +81,18 @@
                             </div>
 
                             <hr>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-start">
                                 
-                                <button type="submit" class="btn btn-primary btn-icon-split shadow-sm">
+                                <button type="submit" class="btn btn-primary btn-icon-split shadow-sm mr-2">
                                     <span class="icon text-white-50"><i class="fas fa-check"></i></span>
                                     <span class="text">Agendar Cita</span>
                                 </button>
+
+                                <a th:href="@{/Paciente/Listarpaciente}" class="btn btn-secondary btn-icon-split shadow-sm">
+                                    <span class="icon text-white-50"><i class="fas fa-times"></i></span>
+                                    <span class="text">Cancelar</span>
+                                </a>
+
                             </div>
                         </form>
                     </div>

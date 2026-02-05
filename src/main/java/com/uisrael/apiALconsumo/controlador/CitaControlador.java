@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uisrael.apiALconsumo.modelo.dto.request.CitasRequestDto;
-import com.uisrael.apiALconsumo.modelo.dto.request.PacienteRequestDTO;
+
 import com.uisrael.apiALconsumo.modelo.dto.response.CitasResponseDto; 
 import com.uisrael.apiALconsumo.modelo.dto.response.PacienteResponseDTO;
 import com.uisrael.apiALconsumo.servicio.ICitasServicio;
@@ -37,26 +37,41 @@ public class CitaControlador {
 
     @GetMapping("/Nuevo")
     public String formularioNuevoCita(@RequestParam(required = false) Integer idPaciente, Model model) {
-        CitasRequestDto cita = new CitasRequestDto();
+    	CitasRequestDto cita = new CitasRequestDto();
+        
+       
+        cita.setFkVeterinario(new com.uisrael.apiALconsumo.modelo.dto.request.VeterinarioRequestDto());
+        cita.setFkPaciente(new com.uisrael.apiALconsumo.modelo.dto.request.PacienteRequestDTO());
+     
+        cita.setServicios(new java.util.ArrayList<>()); 
+
         if (idPaciente != null) {
             PacienteResponseDTO paciente = pacienteServicio.obtenerPorId(idPaciente);
-            PacienteRequestDTO pReq = new PacienteRequestDTO();
-            pReq.setIdPaciente(idPaciente);
-            cita.setFkPaciente(pReq);
+        
+            cita.getFkPaciente().setIdPaciente(idPaciente);
             
             model.addAttribute("nombreMascota", paciente.getNombre());
             model.addAttribute("nombreDuenio", paciente.getFkCliente().getNombres() + " " + paciente.getFkCliente().getApellidos());
         }
 
+        
         model.addAttribute("cita", cita);
         model.addAttribute("listaVeterinarios", veterinarioServicio.listarVeterinario());
         model.addAttribute("listaServicios", servicioCatalogo.listarServicio());
         
         return "Citas/Guardarcita";
+        
+        
     }
 
     @PostMapping("/Guardar")
     public String guardarCita(@ModelAttribute CitasRequestDto cita) {
+    	
+  
+        if (cita.getFkVeterinario() == null) {
+            cita.setFkVeterinario(new com.uisrael.apiALconsumo.modelo.dto.request.VeterinarioRequestDto());
+        }
+
         citaServicio.crearCita(cita);
         return "redirect:/Cita/Listarcita";
     }

@@ -7,6 +7,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.uisrael.apiALconsumo.modelo.dto.request.DetallesRequestDto;
 import com.uisrael.apiALconsumo.modelo.dto.response.DetallesResponseDto;
+
 import com.uisrael.apiALconsumo.servicio.IDetallesServicio;
 
 
@@ -43,6 +44,10 @@ public class DetallesServicioImpl implements IDetallesServicio {
 		public void eliminarDetalle(int id) {
 			// TODO Auto-generated method stub
 			
+		}
+		@Override
+		public DetallesResponseDto obtenerPorId(int id) {
+			return webClient.get().uri("/detalles/{id}", id).retrieve().bodyToMono(DetallesResponseDto.class).block();
 		}
 			
 			
