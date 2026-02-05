@@ -36,6 +36,12 @@ public class VeterinarioServicioImpl implements IVeterinarioServicio{
 		webcliente.delete().uri("/veterinario/{id}", id) .retrieve().toBodilessEntity().block();
 		
 	}
+
+	@Override
+	public VeterinarioResponseDto buscarPorId(int idVeterinario) {
+		return webcliente.get().uri(uriBuilder -> uriBuilder.path("/veterinario/buscarid/{idVeterinarios}")
+				.build(idVeterinario)).retrieve().bodyToMono(VeterinarioResponseDto.class).block();
+	}
 		
 }
 

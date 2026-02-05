@@ -8,4 +8,5 @@ public interface ICitasServicio {
     List<CitasResponseDto> listarCitas();
     void crearCita(CitasRequestDto cita);
     void eliminarCita(int id);
+    CitasResponseDto buscarPorId(int idCita);
 }

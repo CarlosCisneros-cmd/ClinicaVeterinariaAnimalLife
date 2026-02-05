@@ -52,4 +52,10 @@ public class ServicioControlador {
         servicioService.eliminarServicio(id);
         return "redirect:/servicio/listar";
     }
+    
+    @GetMapping("/buscar/{idServicio}")
+    public String editarServicio(@PathVariable int idServicio, Model model) {
+    	model.addAttribute("servicio",servicioService.buscarPorId(idServicio));
+		return "Servicio/Guardarservicio";
+    }
 }

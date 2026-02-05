@@ -68,8 +68,10 @@
                                         <span class="text">Historial</span>
                                     </a>
 
-                                    <a href="#" class="btn btn-warning btn-circle btn-sm mr-1 shadow-sm" title="Editar">
-                                        <i class="fas fa-pencil-alt"></i>
+                                     <a th:href="@{/Paciente/buscar/{idPaciente}(idPaciente=${mascota.idPaciente})}" 
+                                    			class="btn btn-warning btn-circle btn-sm mr-1" 
+                                    			title="Editar">
+                                        		<i class="fas fa-pencil-alt"></i>
                                     </a>
                                     
                                     <a th:href="@{/Paciente/Eliminar/{id}(id=${mascota.idPaciente})}" 

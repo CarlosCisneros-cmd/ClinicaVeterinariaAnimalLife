@@ -35,4 +35,10 @@ public class CitasServicioImpl implements ICitasServicio {
 	public void eliminarCita(int id) {
 	    webcliente.delete().uri("/citas/{id}", id).retrieve().toBodilessEntity().block();
 	}
+
+	@Override
+	public CitasResponseDto buscarPorId(int idCita) {
+		return webcliente.get().uri(uriBuilder -> uriBuilder.path("/citas/buscarid/{idCita}")
+				.build(idCita)).retrieve().bodyToMono(CitasResponseDto.class).block();
+	}
 }

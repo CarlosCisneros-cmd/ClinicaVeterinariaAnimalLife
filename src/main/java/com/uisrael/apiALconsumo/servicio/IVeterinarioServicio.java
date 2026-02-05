@@ -11,4 +11,5 @@ public interface IVeterinarioServicio {
 	public void crearVeterinario(VeterinarioRequestDto dto);
 	public List<VeterinarioResponseDto> listarVeterinario();
 	public void eliminarVeterinario(int id);
+	VeterinarioResponseDto buscarPorId(int idVeterinario);
 }

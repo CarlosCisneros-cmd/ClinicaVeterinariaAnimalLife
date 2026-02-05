@@ -40,8 +40,10 @@
                                 <td th:text="${vet.nombre} + ' ' + ${vet.apellido}"></td>
                                 <td th:text="${vet.correo}"></td>
                                 <td class="text-center"> 
-                                    <a th:href="@{/Veterinario/Nuevo}" class="btn btn-warning btn-circle btn-sm mr-1" title="Editar">
-                                        <i class="fas fa-pencil-alt"></i>
+                                    <a th:href="@{/Veterinario/buscar/{idVeterinario}(idVeterinario=${vet.idveterinario})}" 
+                                    			class="btn btn-warning btn-circle btn-sm mr-1" 
+                                    			title="Editar">
+                                        		<i class="fas fa-pencil-alt"></i>
                                     </a>
                                     <a th:href="@{/Veterinario/Eliminar/{id}(id=${vet.idveterinario})}" 
                                        class="btn btn-danger btn-circle btn-sm" title="Eliminar"

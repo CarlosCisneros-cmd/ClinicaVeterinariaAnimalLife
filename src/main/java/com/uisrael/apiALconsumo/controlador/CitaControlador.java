@@ -88,4 +88,10 @@ public class CitaControlador {
         citaServicio.eliminarCita(id);
         return "redirect:/Cita/Listarcita";
     }
+    
+    @GetMapping("/buscar/{idCita}")
+    public String editarCita(@PathVariable int idCita, Model model) {
+    	model.addAttribute("cita",citaServicio.buscarPorId(idCita));
+		return "Citas/Guardarcita";
+    }
 }

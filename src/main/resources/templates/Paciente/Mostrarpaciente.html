@@ -35,6 +35,7 @@
                                 <th>Especie</th>
                                 <th>Raza</th>
                                 <th>Color</th>
+                                <th>Sexo</th>
                                 <th>F. Nacimiento</th>
                                 <th class="text-center">Opciones</th>
                             </tr>
@@ -45,6 +46,7 @@
                                 <td th:text="${mascota.especie}"></td>
                                 <td th:text="${mascota.raza}"></td>
                                 <td th:text="${mascota.color}"></td>
+                                <td th:text="${mascota.sexo}"></td>
                                 <td th:text="${mascota.fechaNacimiento != null ? #temporals.format(mascota.fechaNacimiento, 'dd/MM/yyyy') : '---'}"></td>
                                 
                                 <td class="text-center"> 
@@ -65,10 +67,10 @@
                                         <span class="text">Historial</span>
                                     </a>
 
-                                    <a th:href="@{/Paciente/Editar/{id}(id=${mascota.idPaciente}, idCliente=${idCliente})}" 
-                                       class="btn btn-warning btn-circle btn-sm mr-2 shadow-sm" 
-                                       title="Editar Mascota">
-                                        <i class="fas fa-pencil-alt"></i>
+                                     <a th:href="@{/Paciente/buscar/{idPaciente}(idPaciente=${mascota.idPaciente})}" 
+                                    			class="btn btn-warning btn-circle btn-sm mr-1" 
+                                    			title="Editar">
+                                        		<i class="fas fa-pencil-alt"></i>
                                     </a>
 
                                     <a th:href="@{/Paciente/Eliminar/{id}(id=${mascota.idPaciente}, idCliente=${idCliente})}" 

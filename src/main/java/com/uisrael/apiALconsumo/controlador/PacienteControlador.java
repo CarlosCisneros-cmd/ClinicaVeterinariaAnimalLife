@@ -71,4 +71,14 @@ public class PacienteControlador {
 	        return "redirect:/Paciente/Listarpaciente"; 
 	    }
 	}
+	
+	 @GetMapping("/buscar/{idPaciente}")
+	    public String editarPaciente(@PathVariable int idPaciente, Model model) {
+		 PacienteResponseDTO pac = servicioPaciente.buscarPorId(idPaciente);
+		    model.addAttribute("paciente", pac);
+		    if (pac != null && pac.getFkCliente() != null) {
+		        model.addAttribute("idCliente", pac.getFkCliente().getIdCliente());
+		    }
+		    return "Paciente/Crearpaciente";
+	    }
 }

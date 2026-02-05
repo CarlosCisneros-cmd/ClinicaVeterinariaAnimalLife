@@ -21,6 +21,7 @@
                 <form th:action="@{/Paciente/Guardar}" th:object="${paciente}" method="post">
                     
                     <input type="hidden" th:field="*{fkCliente.idCliente}">
+                    <input type="hidden"  th:field="*{idPaciente}" required>
 
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">

@@ -37,8 +37,10 @@
                                 <td th:text="${s.nombre_ser}"></td>
                              
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-warning btn-circle btn-sm mr-1" title="Editar">
-                                        <i class="fas fa-pencil-alt"></i>
+                                    <a th:href="@{/servicio/buscar/{idservicio}(idservicio=${s.idservicio})}" 
+                                    			class="btn btn-warning btn-circle btn-sm mr-1" 
+                                    			title="Editar">
+                                        		<i class="fas fa-pencil-alt"></i>
                                     </a>
 
                                     <a th:href="@{/servicio/eliminar/{id}(id=${s.idservicio})}" 

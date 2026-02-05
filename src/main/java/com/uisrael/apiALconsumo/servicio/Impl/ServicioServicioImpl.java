@@ -34,4 +34,10 @@ public class ServicioServicioImpl implements IServicioServicio{
         
         webcliente.delete().uri("/servicios/{id}", id).retrieve().toBodilessEntity().block();
     }
+
+	@Override
+	public ServicioResponseDto buscarPorId(int idServicio) {
+		return webcliente.get().uri(uriBuilder -> uriBuilder.path("/servicios/buscarid/{idServicio}")
+				.build(idServicio)).retrieve().bodyToMono(ServicioResponseDto.class).block();
+	}
 }

@@ -22,6 +22,8 @@
                     <div class="card-body">
                         <form th:action="@{/Cita/Guardar}" th:object="${cita}" method="post">
                             
+                            <input type="hidden"  th:field="*{idCita}">
+                            
                             <div class="card bg-light mb-4 border-left-primary">
                                 <div class="card-body">
                                     <div class="row" th:if="${nombreMascota != null}">
@@ -56,7 +58,7 @@
                                 
                                 <div class="col-sm-6">
                                     <label class="font-weight-bold">Veterinario Responsable:</label>
-                                    <select class="form-control" name="fkVeterinario.idveterinario" required>
+                                    <select class="form-control" name="*{fkVeterinario.idveterinario}" required>
                                         <option value="">Seleccionar médico...</option>
                                         <option th:each="v : ${listaVeterinarios}" 
                                                 th:value="${v.idveterinario}" 
@@ -80,10 +82,7 @@
 
                             <hr>
                             <div class="d-flex justify-content-between">
-                                <a th:href="@{/Paciente/Listar}" class="btn btn-secondary btn-icon-split shadow-sm">
-                                    <span class="icon text-white-50"><i class="fas fa-arrow-left"></i></span>
-                                    <span class="text">Regresar</span>
-                                </a>
+                                
                                 <button type="submit" class="btn btn-primary btn-icon-split shadow-sm">
                                     <span class="icon text-white-50"><i class="fas fa-check"></i></span>
                                     <span class="text">Agendar Cita</span>

@@ -39,4 +39,11 @@ public class PacienteServicioImpl implements IPacienteServicio{
 	    return webcliente.get().uri("/pacientes/{id}", id).retrieve().bodyToMono(PacienteResponseDTO.class).block();
 	}
 
+	@Override
+	public PacienteResponseDTO buscarPorId(int idPaciente) {
+		return webcliente.get().uri(uriBuilder -> uriBuilder.path("/pacientes/buscarid/{idPaciente}")
+				.build(idPaciente)).retrieve().bodyToMono(PacienteResponseDTO.class).block();
+	
+	}
+
 }

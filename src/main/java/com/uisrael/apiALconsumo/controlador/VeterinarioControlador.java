@@ -44,4 +44,10 @@ public class VeterinarioControlador {
 		servicioVeterinario.eliminarVeterinario(id);
 		return "redirect:/Veterinario/Listarveterinario";
 	}
+  	
+  	 @GetMapping("/buscar/{idVeterinario}")
+     public String editarVeterinario(@PathVariable int idVeterinario, Model model) {
+     	model.addAttribute("veterinario",servicioVeterinario.buscarPorId(idVeterinario));
+ 		return "Veterinario/Guardarveterinario";
+     }
 }
