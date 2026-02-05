@@ -19,7 +19,7 @@ public class CabeceraUseCaseImpl implements ICabeceraUseCase{
 	
 	@Override
 	public Cabecera crear(Cabecera cabecera) {
-		return repositorio.guardar(cabecera);
+	    return repositorio.guardar(cabecera);
 	}
 
 	@Override

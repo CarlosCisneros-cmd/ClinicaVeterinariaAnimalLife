@@ -58,4 +58,11 @@ public class DetallesRepositorioImpl implements IDetallesRepositorio {
 				.toList();
 	}
 
+	@Override
+	public List<Detalles> buscarPorPacienteId(int idPaciente) {
+	    return jpaRepository.findByPacienteIdPaciente(idPaciente).stream()
+	            .map(entityMapper::ToDomain)
+	            .toList();
+	}
+
 }

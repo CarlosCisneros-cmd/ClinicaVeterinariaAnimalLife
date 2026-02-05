@@ -27,6 +27,8 @@ private static final long serialVersionUID = 1L;
 	private  String Descripcion;
 	private  String Diagnostico;
 	private  String Analisis;
+	private double Peso;
+	private double Temperatura;
 	private LocalDateTime fechaCreacion;
 	
 	@ManyToOne

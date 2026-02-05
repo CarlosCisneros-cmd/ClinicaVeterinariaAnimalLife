@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -51,6 +52,12 @@ public class DetallesController {
 		return detallesUseCase.listar().stream().map(mapper::toResponseDto).toList();
 	}
 	
+	@GetMapping("/{id}")
+    public ResponseEntity<DetallesResponseDto> obtenerPorId(@PathVariable int id) {
+        DetallesResponseDto response = mapper.toResponseDto(detallesUseCase.obtenerPorId(id));
+        return ResponseEntity.ok(response);
+    }
+	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> eliminar (@PathVariable int id){
 		detallesUseCase.eliminar(id);
@@ -68,6 +75,13 @@ public class DetallesController {
 	            .toList();
 	            
 	    return ResponseEntity.ok(lista);
+	}
+	@PutMapping("/{id}")
+	public ResponseEntity<DetallesResponseDto> actualizar(@PathVariable int id, @Valid @RequestBody DetallesRequestDto request) {
+	    var detalleDominio = mapper.todomain(request);
+	    detalleDominio.setIdDetalles(id); 
+	    var actualizado = detallesUseCase.crear(detalleDominio); 
+	    return ResponseEntity.ok(mapper.toResponseDto(actualizado));
 	}
 
 }

@@ -12,7 +12,7 @@ public interface IDetallesRepositorio {
 	List<Detalles> listarTodos();
 	void eliminar(int id);
 
-	
+	List<Detalles> buscarPorPacienteId(int idPaciente);
 	List<Detalles> buscarDetallePorClienteyPaciente(String nombreCliente, String nombrePaciente);
 
 }

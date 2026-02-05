@@ -22,5 +22,9 @@ public interface IDetallesJpaRepositorio extends JpaRepository<DetallesJpa, Inte
 		    @Param("nombreCliente") String nombreCliente, 
 		    @Param("nombrePaciente") String nombrePaciente
 		);
-
+	@Query("SELECT d FROM DetallesJpa d " +
+	           "JOIN d.fkCita ci " +
+	           "JOIN ci.fkPaciente p " +
+	           "WHERE p.idPaciente = :idPaciente")
+	    List<DetallesJpa> findByPacienteIdPaciente(@Param("idPaciente") int idPaciente);
 }

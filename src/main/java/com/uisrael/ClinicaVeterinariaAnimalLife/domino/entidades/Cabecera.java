@@ -53,10 +53,7 @@ public class Cabecera implements Serializable {
 	public String toString() {
 		return "Cabecera [idCabecera=" + idCabecera + ", nombreCabecera=" + nombreCabecera + ", nombreCliente="
 				+ nombreCliente + ", fechaCreacion=" + fechaCreacion + ", fkPaciente=" + fkPaciente + "]";
-	}
-	
-	
-	
+	}	
 	
 
 }
