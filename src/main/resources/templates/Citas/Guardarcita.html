@@ -4,7 +4,7 @@
       layout:decorate="~{Plantilla/plantillaui}">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <title>Agendar Cita - Animal Life</title>
 </head>
 
@@ -58,19 +58,22 @@
                                 
                                 <div class="col-sm-6">
                                     <label class="font-weight-bold">Veterinario Responsable:</label>
-                                    <select class="form-control" name="fkVeterinario.idveterinario" required>
-                                        <option value="">Seleccionar médico...</option>
-                                        <option th:each="v : ${listaVeterinarios}" 
-                                                th:value="${v.idveterinario}" 
-                                                th:text="${v.nombre} + ' ' + ${v.apellido}"></option>
-                                    </select>
+                                    <select class="form-control" name="fkVeterinario.idveterinario" id="idveterinario" required>
+								        <option value="">Seleccionar médico...</option>
+								        
+								        <option th:each="v : ${listaVeterinarios}" 
+								                th:value="${v.idveterinario}" 
+								                th:text="${v.nombre} + ' ' + ${v.apellido}"
+								                th:selected="${cita.fkVeterinario != null and v.idveterinario == cita.fkVeterinario.idveterinario}">
+								        </option>
+								    </select>
                                 </div>	
                             </div>
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Servicios a realizar:</label>
                                 <select class="form-control select-multiple" 
-                                        name="servicios" 
+                                        th:field="*{servicios}"
                                         multiple="multiple" 
                                         required>
                                     <option th:each="s : ${listaServicios}" 

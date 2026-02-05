@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uisrael.apiALconsumo.modelo.dto.request.CitasRequestDto;
-
+import com.uisrael.apiALconsumo.modelo.dto.request.PacienteRequestDTO;
+import com.uisrael.apiALconsumo.modelo.dto.request.VeterinarioRequestDto;
 import com.uisrael.apiALconsumo.modelo.dto.response.CitasResponseDto; 
 import com.uisrael.apiALconsumo.modelo.dto.response.PacienteResponseDTO;
 import com.uisrael.apiALconsumo.servicio.ICitasServicio;
@@ -106,7 +107,34 @@ public class CitaControlador {
     
     @GetMapping("/buscar/{idCita}")
     public String editarCita(@PathVariable int idCita, Model model) {
-    	model.addAttribute("cita",citaServicio.buscarPorId(idCita));
-		return "Citas/Guardarcita";
+        CitasResponseDto response = citaServicio.buscarPorId(idCita);
+        CitasRequestDto citaReq = new CitasRequestDto();
+        citaReq.setIdCita(response.getIdCita());
+        citaReq.setFecha_Hora(response.getFecha_Hora());
+        if (response.getFkVeterinario() != null) {
+            VeterinarioRequestDto v = new VeterinarioRequestDto();
+            v.setIdveterinario(response.getFkVeterinario().getIdveterinario());
+            citaReq.setFkVeterinario(v);
+        }
+        if (response.getFkPaciente() != null) {
+            PacienteRequestDTO p = new PacienteRequestDTO();
+            p.setIdPaciente(response.getFkPaciente().getIdPaciente());
+            citaReq.setFkPaciente(p);
+            model.addAttribute("nombreMascota", response.getFkPaciente().getNombre());
+            if(response.getFkPaciente().getFkCliente() != null) {
+                model.addAttribute("nombreDuenio", response.getFkPaciente().getFkCliente().getNombres() + " " + response.getFkPaciente().getFkCliente().getApellidos());
+            }
+        }
+        if (response.getServicios() != null) {
+            List<Integer> serviciosIds = response.getServicios().stream()
+                    .map(s -> s.getIdservicio())
+                    .collect(Collectors.toList());
+            citaReq.setServicios(serviciosIds);
+        }
+        model.addAttribute("cita", citaReq);
+        model.addAttribute("listaVeterinarios", veterinarioServicio.listarVeterinario());
+        model.addAttribute("listaServicios", servicioCatalogo.listarServicio());
+        
+        return "Citas/Guardarcita";
     }
 }

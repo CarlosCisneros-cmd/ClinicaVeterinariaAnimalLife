@@ -4,7 +4,7 @@
       layout:decorate="~{Plantilla/plantillaui}">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <title>Listado de Citas - Animal Life</title>
 </head>
 
@@ -72,6 +72,11 @@
                                 
                                 <td class="text-center">
                                    
+                                   <a th:href="@{/Cita/buscar/{idCita}(idCita=${c.idCita})}" 
+                                    			class="btn btn-warning btn-circle btn-sm mr-1" 
+                                    			title="Editar">
+                                        		<i class="fas fa-pencil-alt"></i>
+                                    </a>
                                     <a th:href="@{/Cita/Eliminar/{id}(id=${c.idCita})}" 
                                        class="btn btn-danger btn-circle btn-sm shadow-sm" 
                                        title="Eliminar"
