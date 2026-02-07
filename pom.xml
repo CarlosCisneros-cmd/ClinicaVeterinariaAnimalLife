@@ -84,6 +84,12 @@
     <artifactId>jakarta.validation-api</artifactId>
     <scope>compile</scope>
 </dependency>
+
+	<dependency>
+	    <groupId>com.twilio.sdk</groupId>
+	    <artifactId>twilio</artifactId>
+	    <version>9.14.0</version> 
+	</dependency>
 	</dependencies>
 
 	<build>
