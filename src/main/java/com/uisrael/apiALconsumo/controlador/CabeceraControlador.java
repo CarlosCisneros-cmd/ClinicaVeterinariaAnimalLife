@@ -23,32 +23,35 @@ public class CabeceraControlador {
 	private ICabeceraServicio servicioCabecera;
 	
 	@GetMapping("/Mostrar")
-    public String Mostrarcabecera(@RequestParam int idPaciente,@RequestParam String nombrePac,@RequestParam String nombreCli, Model model) {
-        model.addAttribute("idPaciente", idPaciente);
-        model.addAttribute("nombrePac", nombrePac);
-        model.addAttribute("nombreCli", nombreCli);
-        List<CabeceraResponseDto> todas = servicioCabecera.Listarcabecera();
-        List<CabeceraResponseDto> filtradas = todas.stream()
-            .filter(c -> c.getFkPaciente() != null && c.getFkPaciente().getIdPaciente() == idPaciente)
-            .collect(Collectors.toList());   
-        model.addAttribute("listarcabeceras", filtradas);
-        return "Cabecera/Mostrarcabecera";
-    }
-	
+	public String Mostrarcabecera(@RequestParam int idPaciente, @RequestParam(required = false) String nombrePac, @RequestParam(required = false) String nombreCli, Model model) {
+		List<CabeceraResponseDto> todas = servicioCabecera.Listarcabecera();
+		List<CabeceraResponseDto> filtradas = todas.stream()
+				.filter(c -> c.getFkPaciente() != null && c.getFkPaciente().getIdPaciente() == idPaciente)
+				.collect(Collectors.toList());
+
+		if (!filtradas.isEmpty() && (nombrePac == null || nombreCli == null)) {
+			nombrePac = filtradas.get(0).getFkPaciente().getNombre();
+			nombreCli = filtradas.get(0).getFkPaciente().getFkCliente().getNombres();
+		}
+
+		model.addAttribute("idPaciente", idPaciente);
+		model.addAttribute("nombrePac", nombrePac);
+		model.addAttribute("nombreCli", nombreCli);
+		model.addAttribute("listarcabeceras", filtradas);
+		return "Cabecera/Mostrarcabecera";
+	}
 
 	@GetMapping("/Crearcabecera")
 	public String Crearcabecera(@RequestParam int idPaciente, @RequestParam String nombrePac, @RequestParam String nombreCli) {
-	    CabeceraRequestDto nueva = new CabeceraRequestDto();
-	    nueva.setNombreCabecera(nombrePac);
-	    nueva.setNombreCliente(nombreCli);
-	    nueva.setFechaCreacion(LocalDateTime.now());
-	    PacienteResponseDTO pacienteTemp = new PacienteResponseDTO();
-	    pacienteTemp.setIdPaciente(idPaciente); 
-	    nueva.setFkPaciente(pacienteTemp); 
-	    servicioCabecera.crearCabecera(nueva);
-	    return "redirect:/Cabecera/Mostrar?idPaciente=" + idPaciente + 
-	           "&nombrePac=" + nombrePac + 
-	           "&nombreCli=" + nombreCli;
+		CabeceraRequestDto nueva = new CabeceraRequestDto();
+		nueva.setNombreCabecera(nombrePac);
+		nueva.setNombreCliente(nombreCli);
+		nueva.setFechaCreacion(LocalDateTime.now());
+		PacienteResponseDTO pacienteTemp = new PacienteResponseDTO();
+		pacienteTemp.setIdPaciente(idPaciente);
+		nueva.setFkPaciente(pacienteTemp);
+		servicioCabecera.crearCabecera(nueva);
+		return "redirect:/Cabecera/Mostrar?idPaciente=" + idPaciente;
 	}
 }
 
