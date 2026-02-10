@@ -55,5 +55,10 @@ public class CabeceraController {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@GetMapping("/{id}")
+	public ResponseEntity<CabeceraResponseDto> obtenerPorId(@PathVariable int id) {
+	    CabeceraResponseDto response = mapper.toResponseDto(cabeceraUseCase.obtenerPorId(id));
+	    return ResponseEntity.ok(response);
+	}
 
 }

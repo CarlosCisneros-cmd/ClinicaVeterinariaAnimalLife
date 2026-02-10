@@ -65,4 +65,14 @@ public class DetallesRepositorioImpl implements IDetallesRepositorio {
 	            .toList();
 	}
 
+
+
+
+	@Override
+	public List<Detalles> listarPorCabecera(int idCabecera) {
+		return jpaRepository.findByFkCabecera_IdCabecera(idCabecera).stream()
+	            .map(entityMapper::ToDomain)
+	            .toList();
+	}
+
 }

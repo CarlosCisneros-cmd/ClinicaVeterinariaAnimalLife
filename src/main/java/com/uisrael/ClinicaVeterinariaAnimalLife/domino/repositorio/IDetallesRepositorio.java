@@ -14,5 +14,6 @@ public interface IDetallesRepositorio {
 
 	List<Detalles> buscarPorPacienteId(int idPaciente);
 	List<Detalles> buscarDetallePorClienteyPaciente(String nombreCliente, String nombrePaciente);
+	List<Detalles> listarPorCabecera(int idCabecera);
 
 }

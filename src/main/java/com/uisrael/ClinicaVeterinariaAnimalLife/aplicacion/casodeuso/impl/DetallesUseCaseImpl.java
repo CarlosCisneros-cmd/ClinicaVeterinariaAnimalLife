@@ -44,7 +44,9 @@ private final IDetallesRepositorio repositorio;
 		return repositorio.buscarDetallePorClienteyPaciente(nombreCliente,nombrePaciente);
 	}
 
-
-	
+	@Override
+	public List<Detalles> listarPorCabecera(int idCabecera) {
+	    return repositorio.listarPorCabecera(idCabecera);
+	}
 	
 }

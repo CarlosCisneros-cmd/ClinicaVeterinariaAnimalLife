@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
 import com.uisrael.ClinicaVeterinariaAnimalLife.infraestructura.persistencia.jpa.DetallesJpa;
 
 public interface IDetallesJpaRepositorio extends JpaRepository<DetallesJpa, Integer>{
@@ -27,4 +28,6 @@ public interface IDetallesJpaRepositorio extends JpaRepository<DetallesJpa, Inte
 	           "JOIN ci.fkPaciente p " +
 	           "WHERE p.idPaciente = :idPaciente")
 	    List<DetallesJpa> findByPacienteIdPaciente(@Param("idPaciente") int idPaciente);
+	
+	List<DetallesJpa> findByFkCabecera_IdCabecera(int idCabecera);
 }

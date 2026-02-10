@@ -84,4 +84,13 @@ public class DetallesController {
 	    return ResponseEntity.ok(mapper.toResponseDto(actualizado));
 	}
 
+	@GetMapping("/por-cabecera/{idCabecera}")
+	public ResponseEntity<List<DetallesResponseDto>> listarPorCabecera(@PathVariable int idCabecera) {
+	    List<DetallesResponseDto> lista = detallesUseCase.listarPorCabecera(idCabecera)
+	            .stream()
+	            .map(mapper::toResponseDto)
+	            .toList();
+	    return ResponseEntity.ok(lista);
+	}
+
 }

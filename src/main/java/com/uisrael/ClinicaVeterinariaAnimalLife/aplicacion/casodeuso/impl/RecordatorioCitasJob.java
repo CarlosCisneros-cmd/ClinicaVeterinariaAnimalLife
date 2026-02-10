@@ -28,8 +28,8 @@ public class RecordatorioCitasJob {
     // Cron: Segundos Minutos Horas Día Mes DíaSemana
     // "0 0 7 * * ?" significa: A las 07:00 AM todos los días
     
- // @Scheduled(cron = "0 * * * * ?")
-    @Scheduled(cron = "0 0 5 * * ?") 
+  //@Scheduled(cron = "0 * * * * ?")
+    @Scheduled(cron = "0 0 7 * * ?") 
     @Transactional
     public void enviarRecordatoriosDiarios() {
         System.out.println("⏰ Iniciando tarea de recordatorios...");
