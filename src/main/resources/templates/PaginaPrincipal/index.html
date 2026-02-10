@@ -1,38 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-		layout:decorate="~{Plantilla/plantillaui}">
-		
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{Plantilla/plantillaui}">
 
 <head>
-	<meta charset="utf-8">
-  
-   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-	<link rel="stylesheet" th:href="@{/css/custom.css}">
+    <meta charset="utf-8">
+    <title>Bienvenida - Animal Life</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
-	
-	 
 <body>
 
-
-<div layout:fragment="contenido">
-
-    <section class="hero">
-    
-        <div class="hero-overlay"></div>
-
-        <div class="hero-content text-center">
-            <p class="hero-subtitle">Clinica Veterinaria Animal Life</p>
-            <h1 class="hero-title">Bienvenido Administrador</h1>
+    <div layout:fragment="contenido">
+        <div class="container-fluid d-flex align-items-center justify-content-center" 
+             style="min-height: 85vh; background-color: #ffffff;">
             
+            <div class="text-center">
+                <div class="mb-4">
+                    <img th:src="@{/img/LOGOTIPO_ESQUINA_LOGO.png}" alt="Logo Animal Life" 
+                         style="width: 300px; height: auto; opacity: 0.6; filter: grayscale(100%) brightness(0.2);">
+                </div>
+
+                <p style="font-family: 'Poppins', sans-serif; color: #868e96; font-weight: 400; 
+                          letter-spacing: 5px; text-transform: uppercase; font-size: 1rem; margin-bottom: 10px;">
+                    Clínica Veterinaria Animal Life
+                </p>
+
+                <h1 style="font-family: 'Poppins', sans-serif; color: #343a40; font-weight: 600; 
+                           font-size: 3rem; margin-top: 0;">
+                    Bienvenido Administrador
+                </h1>
+
+                <hr style="width: 80px; border: 1.5px solid #dee2e6; margin: 40px auto; opacity: 0.8;">
+            </div>
         </div>
-    </section>
-
-</div>
-
-   
+    </div>
 
 </body>
-
 </html>
