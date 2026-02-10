@@ -13,6 +13,14 @@
 
         <h1 class="h3 mb-4 text-gray-800">Registrar Nuevo Cliente</h1>
 
+        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+            <i class="fas fa-exclamation-triangle mr-2"></i>
+            <strong th:text="${error}"></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Datos del Propietario</h6>
@@ -20,49 +28,63 @@
             <div class="card-body">
                 <form th:action="@{/Cliente/Guardar}" th:object="${cliente}" method="post">
                   
-                        <input type="hidden" class="form-control" th:field="*{idCliente}" required>
+                    <input type="hidden" th:field="*{idCliente}">
                     
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <label>Nombres</label>
+                            <label class="font-weight-bold text-gray-800">Nombres</label>
                             <input type="text" class="form-control" placeholder="Juan" th:field="*{nombres}" required>
                         </div>
                         <div class="col-sm-6">
-                            <label>Apellidos</label>
+                            <label class="font-weight-bold text-gray-800">Apellidos</label>
                             <input type="text" class="form-control" placeholder="Pérez" th:field="*{apellidos}" required>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <label>Cédula</label>
-                            <input type="text" class="form-control" placeholder="172xxxxxxx" th:field="*{cedula}" required>
+                            <label class="font-weight-bold text-gray-800">Cédula / Pasaporte</label>
+                            <input type="text" class="form-control" 
+                                   placeholder="Mínimo 9, máximo 13 caracteres" 
+                                   th:field="*{cedula}" 
+                                   minlength="9"
+                                   maxlength="13" 
+                                   pattern="^[a-zA-Z0-9]{9,13}$"
+                                   title="Debe tener entre 9 y 13 caracteres alfanuméricos"
+                                   required>
+                           
                         </div>
                         <div class="col-sm-6">
-                            <label>Teléfono</label>
-                            <input type="text" class="form-control" placeholder="099xxxxxxx" th:field="*{telefono}" required>
+                            <label class="font-weight-bold text-gray-800">Teléfono</label>
+                            <input type="text" class="form-control" placeholder="099xxxxxxx" 
+                                   th:field="*{telefono}" 
+                                   maxlength="10" 
+                                   onkeypress="return event.charCode >= 48 && event.charCode <= 57" 
+                                   pattern="^09\d{8}$" 
+                                   title="El teléfono debe iniciar con 09 y tener 10 dígitos numéricos" 
+                                   required>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <label>Correo</label>
+                            <label class="font-weight-bold text-gray-800">Correo Electrónico</label>
                             <input type="email" class="form-control" placeholder="correo@ejemplo.com" th:field="*{correo}" required>
                         </div>
                         <div class="col-sm-6">
-                            <label>Dirección</label>
+                            <label class="font-weight-bold text-gray-800">Dirección</label>
                             <input type="text" class="form-control" placeholder="Quito, Sector..." th:field="*{direccion}" required>
                         </div>
                     </div>
 
                     <hr>
 
-                    <button type="submit" class="btn btn-primary btn-icon-split">
+                    <button type="submit" class="btn btn-primary btn-icon-split shadow-sm">
                         <span class="icon text-white-50"><i class="fas fa-check"></i></span>
                         <span class="text">Guardar Cliente</span>
                     </button>
                     
-                    <a th:href="@{/Cliente/Listarcliente}" class="btn btn-secondary btn-icon-split ml-2">
+                    <a th:href="@{/Cliente/Listarcliente}" class="btn btn-secondary btn-icon-split ml-2 shadow-sm">
                         <span class="icon text-white-50"><i class="fas fa-times"></i></span>
                         <span class="text">Cancelar</span>
                     </a>

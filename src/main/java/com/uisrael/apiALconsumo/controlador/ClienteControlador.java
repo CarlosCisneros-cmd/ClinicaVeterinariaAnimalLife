@@ -30,9 +30,15 @@ public class ClienteControlador {
     }
 
     @PostMapping("/Guardar")
-    public String Guardarcliente(@ModelAttribute ClienteRequestDto cliente) {
-        servicioCliente.crearCliente(cliente);
-        return "redirect:/Cliente/Listarcliente";
+    public String Guardarcliente(@ModelAttribute ClienteRequestDto cliente, Model model) {
+        try {
+            servicioCliente.crearCliente(cliente);
+            return "redirect:/Cliente/Listarcliente";
+        } catch (RuntimeException e) {
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("cliente", cliente);
+            return "Cliente/Crearcliente";
+        }
     }
 
     @GetMapping("/Eliminar/{id}")
@@ -43,7 +49,22 @@ public class ClienteControlador {
     
     @GetMapping("/buscar/{idCliente}")
     public String editarCliente(@PathVariable int idCliente, Model model) {
-    	model.addAttribute("cliente",servicioCliente.buscarPorId(idCliente));
-		return "Cliente/Crearcliente";
+        model.addAttribute("cliente", servicioCliente.buscarPorId(idCliente));
+        return "Cliente/Crearcliente";
+    }
+
+   
+    @GetMapping("/Recuperarcliente")
+    public String mostrarPapelera(Model model) {
+        List<ClienteResponseDto> inactivos = servicioCliente.listarClientesInactivos();
+        model.addAttribute("listarinactivos", inactivos);
+        return "Cliente/Recuperarcliente";
+    }
+
+    
+    @GetMapping("/Activar/{id}")
+    public String activarCliente(@PathVariable int id) {
+        servicioCliente.recuperarCliente(id);
+        return "redirect:/Cliente/Listarcliente";
     }
 }
