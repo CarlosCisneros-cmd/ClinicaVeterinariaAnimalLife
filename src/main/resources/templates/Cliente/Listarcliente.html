@@ -16,10 +16,18 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Listado de Clientes Registrados</h6>
-                <a th:href="@{/Cliente}" class="btn btn-success btn-icon-split shadow-sm">
-                    <span class="icon text-white-50"><i class="fas fa-plus"></i></span>
-                    <span class="text">Agregar Nuevo Cliente</span>
-                </a>
+                
+                <div>
+                    <a th:href="@{/Cliente/Recuperarcliente}" class="btn btn-secondary btn-icon-split shadow-sm mr-2">
+                        <span class="icon text-white-50"><i class="fas fa-trash-restore"></i></span>
+                        <span class="text">Ver Eliminados</span>
+                    </a>
+
+                    <a th:href="@{/Cliente}" class="btn btn-success btn-icon-split shadow-sm">
+                        <span class="icon text-white-50"><i class="fas fa-plus"></i></span>
+                        <span class="text">Agregar Nuevo Cliente</span>
+                    </a>
+                </div>
             </div>
 
             <div class="card-body">
@@ -30,6 +38,7 @@
                                 <th>Nombre Completo</th>
                                 <th>Cédula</th>
                                 <th>Teléfono</th>
+                                <th>Correo</th> 
                                 <th>Dirección</th>
                                 <th class="text-center">Opciones</th>
                             </tr>
@@ -39,6 +48,7 @@
                                 <td th:text="${clienterecorrido.nombres} + ' ' + ${clienterecorrido.apellidos}"></td>
                                 <td th:text="${clienterecorrido.cedula}"></td>
                                 <td th:text="${clienterecorrido.telefono}"></td>
+                                <td th:text="${clienterecorrido.correo}"></td> 
                                 <td th:text="${clienterecorrido.direccion}"></td>
                                 <td class="text-center"> 
                                     
@@ -49,22 +59,22 @@
                                     </a>
 
                                     <a th:href="@{/Cliente/buscar/{idCliente}(idCliente=${clienterecorrido.idCliente})}" 
-                                    			class="btn btn-warning btn-circle btn-sm mr-1" 
-                                    			title="Editar">
-                                        		<i class="fas fa-pencil-alt"></i>
+                                       class="btn btn-warning btn-circle btn-sm mr-1" 
+                                       title="Editar">
+                                        <i class="fas fa-pencil-alt"></i>
                                     </a>
 
                                     <a th:href="@{/Cliente/Eliminar/{id}(id=${clienterecorrido.idCliente})}" 
                                        class="btn btn-danger btn-circle btn-sm"
                                        title="Eliminar Cliente"
-                                       onclick="return confirm('¿Está seguro de eliminar este cliente?');">
+                                       onclick="return confirm('¿Está seguro de ocultar este cliente? El registro podrá ser recuperado en la papelera.');">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
                             </tr>
                             
                             <tr th:if="${#lists.isEmpty(listarclientes)}">
-                                <td colspan="5" class="text-center">No hay clientes activos en el sistema.</td>
+                                <td colspan="6" class="text-center">No hay clientes activos en el sistema.</td>
                             </tr>
                         </tbody>
                     </table>

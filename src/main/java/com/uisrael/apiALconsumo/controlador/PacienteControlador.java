@@ -41,7 +41,6 @@ public class PacienteControlador {
 		return "Paciente/Crearpaciente";
 	}
 	
-	
 	@GetMapping("/Mostrarpaciente")
 	public String Mostrarpaciente(@RequestParam int idCliente, Model model) {
 		model.addAttribute("idCliente", idCliente);
@@ -52,33 +51,40 @@ public class PacienteControlador {
 		model.addAttribute("listaMascotas", filtradas);
 		return "Paciente/Mostrarpaciente";
 	}
-	
 
 	@PostMapping("/Guardar")
-	public String Guardarpaciente(@ModelAttribute PacienteRequestDTO paciente) {
-		servicioPaciente.crearPaciente(paciente);
-		int id = (paciente.getFkCliente() != null) ? paciente.getFkCliente().getIdCliente() : 0;
-		return "redirect:/Paciente/Mostrarpaciente?idCliente=" + id;
+	public String Guardarpaciente(@ModelAttribute PacienteRequestDTO paciente, Model model) {
+		try {
+			servicioPaciente.crearPaciente(paciente);
+			int id = (paciente.getFkCliente() != null) ? paciente.getFkCliente().getIdCliente() : 0;
+			return "redirect:/Paciente/Mostrarpaciente?idCliente=" + id;
+		} catch (RuntimeException e) {
+			model.addAttribute("error", e.getMessage());
+			model.addAttribute("paciente", paciente);	
+			int idCliente = (paciente.getFkCliente() != null) ? paciente.getFkCliente().getIdCliente() : 0;
+			model.addAttribute("idCliente", idCliente);
+			
+			return "Paciente/Crearpaciente";
+		}
 	}
-	
 	
 	@GetMapping("/Eliminar/{id}")
 	public String eliminarPaciente(@PathVariable int id, @RequestParam(required = false) Integer idCliente) {
-	    servicioPaciente.eliminarPaciente(id);
-	    if (idCliente != null) {
-	        return "redirect:/Paciente/Mostrarpaciente?idCliente=" + idCliente;
-	    } else {
-	        return "redirect:/Paciente/Listarpaciente"; 
-	    }
+		servicioPaciente.eliminarPaciente(id);
+		if (idCliente != null) {
+			return "redirect:/Paciente/Mostrarpaciente?idCliente=" + idCliente;
+		} else {
+			return "redirect:/Paciente/Listarpaciente"; 
+		}
 	}
 	
-	 @GetMapping("/buscar/{idPaciente}")
-	    public String editarPaciente(@PathVariable int idPaciente, Model model) {
-		 PacienteResponseDTO pac = servicioPaciente.buscarPorId(idPaciente);
-		    model.addAttribute("paciente", pac);
-		    if (pac != null && pac.getFkCliente() != null) {
-		        model.addAttribute("idCliente", pac.getFkCliente().getIdCliente());
-		    }
-		    return "Paciente/Crearpaciente";
-	    }
+	@GetMapping("/buscar/{idPaciente}")
+	public String editarPaciente(@PathVariable int idPaciente, Model model) {
+		PacienteResponseDTO pac = servicioPaciente.buscarPorId(idPaciente);
+		model.addAttribute("paciente", pac);
+		if (pac != null && pac.getFkCliente() != null) {
+			model.addAttribute("idCliente", pac.getFkCliente().getIdCliente());
+		}
+		return "Paciente/Crearpaciente";
+	}
 }

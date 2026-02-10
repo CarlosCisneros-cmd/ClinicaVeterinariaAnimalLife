@@ -34,9 +34,18 @@ public class VeterinarioControlador {
   	}
 
   	@PostMapping("/Guardar")
-  	public String Guardarveterinario(@ModelAttribute VeterinarioRequestDto veterinario) {
-  		servicioVeterinario.crearVeterinario(veterinario);
-  		return "redirect:/Veterinario/Listarveterinario";
+  	public String Guardarveterinario(@ModelAttribute VeterinarioRequestDto veterinario, Model model) {
+  		try {
+  			
+  			servicioVeterinario.crearVeterinario(veterinario);
+  			return "redirect:/Veterinario/Listarveterinario";
+  		} catch (RuntimeException e) {
+  			
+  			model.addAttribute("error", e.getMessage());
+  			
+  			model.addAttribute("veterinario", veterinario);
+  			return "Veterinario/Guardarveterinario";
+  		}
   	}
   	
   	@GetMapping("/Eliminar/{id}")
@@ -46,8 +55,8 @@ public class VeterinarioControlador {
 	}
   	
   	 @GetMapping("/buscar/{idVeterinario}")
-     public String editarVeterinario(@PathVariable int idVeterinario, Model model) {
-     	model.addAttribute("veterinario",servicioVeterinario.buscarPorId(idVeterinario));
- 		return "Veterinario/Guardarveterinario";
-     }
+  	 public String editarVeterinario(@PathVariable int idVeterinario, Model model) {
+  	 	model.addAttribute("veterinario", servicioVeterinario.buscarPorId(idVeterinario));
+  		return "Veterinario/Guardarveterinario";
+  	 }
 }

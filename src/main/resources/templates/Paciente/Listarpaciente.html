@@ -41,18 +41,23 @@
                                 <td th:text="${mascota.color}"></td>
                                 <td th:text="${mascota.fechaNacimiento != null ? #temporals.format(mascota.fechaNacimiento, 'dd/MM/yyyy') : '---'}"></td>
                                 
-                                <td th:text="${mascota.fkCliente != null ? (mascota.fkCliente.nombres + ' ' + mascota.fkCliente.apellidos) : 'CLIENTE INACTIVO'}"></td>
+                                <td>
+                                    <span th:text="${mascota.fkCliente != null ? (mascota.fkCliente.nombres + ' ' + mascota.fkCliente.apellidos) : 'SIN DUEÑO'}"></span>
+                                    <small th:if="${mascota.fkCliente != null and !mascota.fkCliente.estado}" class="text-danger d-block">
+                                        (Inactivo en Papelera)
+                                    </small>
+                                </td>
                                 
                                 <td class="text-center"> 
                                     
-                                    <a th:if="${mascota.fkCliente != null}"
+                                    <a th:if="${mascota.fkCliente != null and mascota.fkCliente.estado}"
                                        th:href="@{/Cita/Nuevo(idPaciente=${mascota.idPaciente})}" 
                                        class="btn btn-primary btn-icon-split btn-sm mr-2 shadow-sm">
                                         <span class="icon text-white-50"><i class="fas fa-calendar-plus"></i></span>
                                         <span class="text">Agendar</span>
                                     </a>
 
-                                    <span th:if="${mascota.fkCliente == null}" 
+                                    <span th:if="${mascota.fkCliente == null or !mascota.fkCliente.estado}" 
                                           class="badge badge-secondary p-2 mr-2 shadow-sm" 
                                           style="font-size: 0.75rem; font-weight: bold;">
                                         <i class="fas fa-user-slash"></i> Cita Bloqueada
@@ -68,10 +73,10 @@
                                         <span class="text">Historial</span>
                                     </a>
 
-                                     <a th:href="@{/Paciente/buscar/{idPaciente}(idPaciente=${mascota.idPaciente})}" 
-                                    			class="btn btn-warning btn-circle btn-sm mr-1" 
-                                    			title="Editar">
-                                        		<i class="fas fa-pencil-alt"></i>
+                                    <a th:href="@{/Paciente/buscar/{idPaciente}(idPaciente=${mascota.idPaciente})}" 
+                                       class="btn btn-warning btn-circle btn-sm mr-1" 
+                                       title="Editar">
+                                        <i class="fas fa-pencil-alt"></i>
                                     </a>
                                     
                                     <a th:href="@{/Paciente/Eliminar/{id}(id=${mascota.idPaciente})}" 

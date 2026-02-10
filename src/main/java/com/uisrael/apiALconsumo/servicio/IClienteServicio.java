@@ -10,4 +10,6 @@ public interface IClienteServicio {
     public void eliminarCliente(int id);
     ClienteResponseDto obtenerPorId(int id);
     ClienteResponseDto buscarPorId(int idCliente);
+    List<ClienteResponseDto> listarClientesInactivos();
+    void recuperarCliente(int id);
 }

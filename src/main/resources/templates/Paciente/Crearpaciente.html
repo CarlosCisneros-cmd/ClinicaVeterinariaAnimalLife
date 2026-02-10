@@ -13,6 +13,14 @@
 
         <h1 class="h3 mb-4 text-gray-800">Registrar Mascota</h1>
 
+        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-triangle mr-2"></i>
+            <strong th:text="${error}"></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Datos de la Mascota</h6>
@@ -21,7 +29,7 @@
                 <form th:action="@{/Paciente/Guardar}" th:object="${paciente}" method="post" accept-charset="UTF-8">
                     
                     <input type="hidden" th:field="*{fkCliente.idCliente}">
-                    <input type="hidden"  th:field="*{idPaciente}" required>
+                    <input type="hidden" th:field="*{idPaciente}">
 
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
@@ -39,16 +47,16 @@
                             <label>Raza</label>
                             <input type="text" class="form-control" placeholder="Ej: Pequines" th:field="*{raza}" required>
                         </div>
-                       <div class="col-md-6 col-12">
-					    <div class="form-group">
-					        <label>Sexo</label>
-					        <select class="form-control "  th:field="*{sexo}" required>
-					            <option value="" selected>Seleccione Sexo</option>
-					            <option value="Macho">Macho</option>
-					            <option value="Hembra">Hembra</option>
-					        </select>
-					    </div>
-					</div>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label>Sexo</label>
+                                <select class="form-control" th:field="*{sexo}" required>
+                                    <option value="" selected>Seleccione Sexo</option>
+                                    <option value="Macho">Macho</option>
+                                    <option value="Hembra">Hembra</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group row">
@@ -58,7 +66,7 @@
                         </div>
                         <div class="col-sm-6">
                             <label>Fecha de Nacimiento</label>
-                            <input type="date" class="form-control" th:field="*{fechaNacimiento}" required>
+                            <input type="date" class="form-control" th:field="*{fechaNacimiento}" id="fechaNac" required>
                         </div>
                     </div>
                     
@@ -76,6 +84,14 @@
                 </form>
             </div>
         </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('fechaNac').setAttribute('max', today);
+            });
+        </script>
+
     </div>
 </body>
 </html>
