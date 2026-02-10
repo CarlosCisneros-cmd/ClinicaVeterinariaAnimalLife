@@ -7,25 +7,26 @@ import com.uisrael.ClinicaVeterinariaAnimalLife.aplicacion.casodeuso.entrada.ICi
 import com.uisrael.ClinicaVeterinariaAnimalLife.domino.entidades.Citas;
 import com.uisrael.ClinicaVeterinariaAnimalLife.domino.repositorio.ICitasRepositorio;
 
-public class CitasUseCaseImpl implements ICitaUseCase{
+public class CitasUseCaseImpl implements ICitaUseCase {
 	
 	private final ICitasRepositorio repositorio;
-	
 
 	public CitasUseCaseImpl(ICitasRepositorio repositorio) {
-		
 		this.repositorio = repositorio;
 	}
-	
 
 	@Override
 	public Citas crear(Citas citas) {
+		if (citas.getFecha_Hora() != null && citas.getFecha_Hora().isBefore(LocalDateTime.now())) {
+			throw new RuntimeException("No se puede agendar la cita: La fecha y hora seleccionada ya ha pasado.");
+		}
 		return repositorio.guardar(citas);
 	}
 
 	@Override
 	public Citas obtenerPorId(int id) {
-		return repositorio.buscarPorId(id).orElseThrow(() ->new RuntimeException("Cita no encontrada"));
+		return repositorio.buscarPorId(id)
+				.orElseThrow(() -> new RuntimeException("Cita no encontrada"));
 	}
 
 	@Override
@@ -35,17 +36,16 @@ public class CitasUseCaseImpl implements ICitaUseCase{
 
 	@Override
 	public void eliminar(int id) {
-	    repositorio.eliminar(id);
+		repositorio.eliminar(id);
 	}
+
 	@Override
 	public List<Citas> buscarPorRango(LocalDateTime inicio, LocalDateTime fin) {
 		return repositorio.buscarPorRango(inicio, fin);
 	}
 
-
 	@Override
 	public List<Citas> buscarCitasPorVeterinarioyFecha(String nombre, LocalDateTime fecha_hora) {
-		return repositorio.buscarCitasPorVeterinarioyFecha(nombre,fecha_hora);
+		return repositorio.buscarCitasPorVeterinarioyFecha(nombre, fecha_hora);
 	}
-
 }

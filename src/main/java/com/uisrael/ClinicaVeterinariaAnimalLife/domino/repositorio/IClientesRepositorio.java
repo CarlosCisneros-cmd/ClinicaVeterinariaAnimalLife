@@ -12,8 +12,12 @@ public interface IClientesRepositorio {
 	List<Clientes> listarTodos();
 	void eliminar(int id);
 
-	
 	List<Clientes> buscarPorNombresyCorreo (String nombres, String correo);
 
+	boolean existePorCedula(String cedula);
+    boolean existePorCorreo(String correo);
 
+    
+    List<Clientes> listarInactivos();
+    void activar(int id);
 }

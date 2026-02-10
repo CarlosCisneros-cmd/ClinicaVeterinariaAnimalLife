@@ -16,4 +16,6 @@ public interface IVeterinarioJpaRepositorio extends JpaRepository <VeterinarioJp
 	
 	@Query("SELECT v FROM VeterinarioJpa v WHERE v.apellido = :apellido")
     List<VeterinarioJpa> buscarPorApellido(@Param("apellido") String apellido);
+	boolean existsByCedula(String cedula);
+    boolean existsByCorreo(String correo);
 }
