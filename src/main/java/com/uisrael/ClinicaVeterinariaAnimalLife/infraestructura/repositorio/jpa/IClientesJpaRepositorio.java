@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import java.util.List;
+import java.util.Optional;
+
 import com.uisrael.ClinicaVeterinariaAnimalLife.infraestructura.persistencia.jpa.ClientesJpa;
 
 public interface IClientesJpaRepositorio extends JpaRepository<ClientesJpa, Integer> {
@@ -22,4 +24,6 @@ public interface IClientesJpaRepositorio extends JpaRepository<ClientesJpa, Inte
     boolean existsByCedula(String cedula);
 
     boolean existsByCorreo(String correo);
+    Optional<ClientesJpa> findByCedula(String cedula);
+    Optional<ClientesJpa> findByCorreo(String correo);
 }

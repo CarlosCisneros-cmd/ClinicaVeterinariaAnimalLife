@@ -34,7 +34,6 @@ public class ClientesRespositorioImpl implements IClientesRepositorio {
 
     @Override
     public List<Clientes> listarTodos() {
-        // CAMBIO: Ahora usamos el método filtrado para no mezclar con la papelera
         return jpaRepository.listarSoloActivos()
                 .stream()
                 .map(entityMapper::toDomain)
@@ -64,9 +63,22 @@ public class ClientesRespositorioImpl implements IClientesRepositorio {
         return jpaRepository.existsByCorreo(correo);
     }
 
+    
+    @Override
+    public Optional<Clientes> buscarPorCedula(String cedula) {
+        return jpaRepository.findByCedula(cedula)
+                .map(entityMapper::toDomain);
+    }
+
+    
+    @Override
+    public Optional<Clientes> buscarPorCorreo(String correo) {
+        return jpaRepository.findByCorreo(correo)
+                .map(entityMapper::toDomain);
+    }
+
     @Override
     public List<Clientes> listarInactivos() {
-       
         return jpaRepository.buscarSoloInactivos()
                 .stream()
                 .map(entityMapper::toDomain)

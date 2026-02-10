@@ -1,6 +1,7 @@
 package com.uisrael.ClinicaVeterinariaAnimalLife.aplicacion.casodeuso.impl;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 import com.uisrael.ClinicaVeterinariaAnimalLife.aplicacion.casodeuso.entrada.IClienteUseCase;
 import com.uisrael.ClinicaVeterinariaAnimalLife.domino.entidades.Clientes;
@@ -17,14 +18,23 @@ public class ClienteUseCaseImpl implements IClienteUseCase {
 
     @Override
     public Clientes crear(Clientes cliente) {
-        if (repositorio.existePorCedula(cliente.getCedula())) {
-            throw new RuntimeException("No se puede registrar: La cédula " + cliente.getCedula() + " ya existe.");
+       
+        Optional<Clientes> clienteConMismaCedula = repositorio.buscarPorCedula(cliente.getCedula());
+        
+        
+        if (clienteConMismaCedula.isPresent() && 
+           (cliente.getIdCliente() == 0 || clienteConMismaCedula.get().getIdCliente() != cliente.getIdCliente())) {
+            throw new RuntimeException("No se puede registrar: La cédula " + cliente.getCedula() + " ya pertenece a otro cliente.");
         }
 
-        if (repositorio.existePorCorreo(cliente.getCorreo())) {
-            throw new RuntimeException("No se puede registrar: El correo " + cliente.getCorreo() + " ya está en uso.");
+     
+        Optional<Clientes> clienteConMismoCorreo = repositorio.buscarPorCorreo(cliente.getCorreo());
+        
+        if (clienteConMismoCorreo.isPresent() && 
+           (cliente.getIdCliente() == 0 || clienteConMismoCorreo.get().getIdCliente() != cliente.getIdCliente())) {
+            throw new RuntimeException("No se puede registrar: El correo " + cliente.getCorreo() + " ya está en uso por otro cliente.");
         }
-       
+        
         return repositorio.guardar(cliente);
     }
 
@@ -48,8 +58,6 @@ public class ClienteUseCaseImpl implements IClienteUseCase {
     public List<Clientes> buscarPorNombresyCorreo(String nombres, String correo) {
         return repositorio.buscarPorNombresyCorreo(nombres, correo);
     }
-
-    
 
     @Override
     public List<Clientes> listarInactivos() {
