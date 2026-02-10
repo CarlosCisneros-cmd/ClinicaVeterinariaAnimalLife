@@ -1,17 +1,12 @@
 package com.uisrael.ClinicaVeterinariaAnimalLife.presentacion.controlador;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.uisrael.ClinicaVeterinariaAnimalLife.aplicacion.casodeuso.entrada.IClienteUseCase;
 import com.uisrael.ClinicaVeterinariaAnimalLife.presentacion.dto.mapeador.IClienteDtoMapper;
@@ -24,38 +19,59 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/clientes")
 public class ClienteController {
 
-	private final IClienteUseCase clienteUseCase;
-	private final IClienteDtoMapper mapper;
-	
-	public ClienteController (IClienteUseCase clienteUseCase, IClienteDtoMapper mapper) {
-	this.clienteUseCase = clienteUseCase;
-	this.mapper = mapper;
+    private final IClienteUseCase clienteUseCase;
+    private final IClienteDtoMapper mapper;
 
-}
-	@PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ClienteResponseDto crear(@Valid @RequestBody ClienteRequestDto request) {
-
-        return mapper.toResponseDto(clienteUseCase.crear(mapper.toDomain(request)));
+    public ClienteController(IClienteUseCase clienteUseCase, IClienteDtoMapper mapper) {
+        this.clienteUseCase = clienteUseCase;
+        this.mapper = mapper;
     }
-	@GetMapping
-	public List<ClienteResponseDto> listar(){
-		
-	return clienteUseCase.listar().stream().map(mapper::toResponseDto).toList();
-		
-	}
-	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> eliminar (@PathVariable int id){
-		clienteUseCase.eliminar(id);
-		return ResponseEntity.noContent().build();
-	}
-	
-	@GetMapping("buscarid/{idCliente}")
-	public ClienteResponseDto buscarPorId(@PathVariable int idCliente) {
-		return mapper.toResponseDto(clienteUseCase.obtenerPorId(idCliente));
-		
-	}
+
+    @PostMapping
+    public ResponseEntity<?> crear(@Valid @RequestBody ClienteRequestDto request) {
+        try {
+            ClienteResponseDto response = mapper.toResponseDto(
+                clienteUseCase.crear(mapper.toDomain(request))
+            );
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } catch (RuntimeException e) {
+            Map<String, String> error = new HashMap<>();
+            error.put("mensaje", e.getMessage()); 
+            return ResponseEntity.badRequest().body(error);
+        }
+    }
+
+    @GetMapping
+    public List<ClienteResponseDto> listar() {
+        return clienteUseCase.listar().stream().map(mapper::toResponseDto).toList();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable int id) {
+        clienteUseCase.eliminar(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("buscarid/{idCliente}")
+    public ClienteResponseDto buscarPorId(@PathVariable int idCliente) {
+        return mapper.toResponseDto(clienteUseCase.obtenerPorId(idCliente));
+    }
+
+
+
+    @GetMapping("/inactivos")
+    public List<ClienteResponseDto> listarInactivos() {
+        return clienteUseCase.listarInactivos()
+                .stream()
+                .map(mapper::toResponseDto)
+                .toList();
+    }
+
+    @PutMapping("/recuperar/{id}")
+    public ResponseEntity<Void> recuperar(@PathVariable int id) {
+        clienteUseCase.recuperar(id);
+        return ResponseEntity.noContent().build();
+    }
 }
 	
 		

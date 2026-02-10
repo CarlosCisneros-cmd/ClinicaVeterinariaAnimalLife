@@ -14,6 +14,8 @@ import com.uisrael.ClinicaVeterinariaAnimalLife.presentacion.dto.response.CitasR
 })
 public interface ICitaDtoMapper {
 
+    
+    @Mapping(source = "fecha_Hora", target = "fecha_Hora")
     @Mapping(target = "estado", constant = "true") 
     @Mapping(target = "fkVeterinario.estado", constant = "true")
     @Mapping(target = "fkPaciente.estado", constant = "true")
@@ -21,6 +23,7 @@ public interface ICitaDtoMapper {
     @Mapping(target = "servicios", source = "servicios")
     Citas todomain(CitasRequestDto dto);
 
+    @Mapping(source = "fecha_Hora", target = "fecha_Hora")
     CitasResponseDto toResponseDto(Citas cita);
 
     default Servicio mapIdToServicio(Integer id) {

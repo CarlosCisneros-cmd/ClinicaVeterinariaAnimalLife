@@ -1,17 +1,12 @@
 package com.uisrael.ClinicaVeterinariaAnimalLife.presentacion.controlador;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.uisrael.ClinicaVeterinariaAnimalLife.aplicacion.casodeuso.entrada.IVeterinarioUseCase;
 import com.uisrael.ClinicaVeterinariaAnimalLife.presentacion.dto.mapeador.IVeterinarioDtoMapper;
@@ -21,29 +16,41 @@ import com.uisrael.ClinicaVeterinariaAnimalLife.presentacion.dto.response.Veteri
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/veterinario")
+@RequestMapping("/api/veterinarios") 
 public class VeterinarioController {
 	
 	private final IVeterinarioUseCase veterinarioUseCase;
 	private final IVeterinarioDtoMapper mapper;
+
 	public VeterinarioController(IVeterinarioUseCase veterinarioUseCase, IVeterinarioDtoMapper mapper) {
 		this.veterinarioUseCase = veterinarioUseCase;
 		this.mapper = mapper;
 	}
 	
-@PostMapping
-@ResponseStatus(HttpStatus.CREATED)
-
-	public VeterinarioResponseDto crear(@Valid @RequestBody VeterinarioRequestDto request) {
-	return mapper.toResponseDto(veterinarioUseCase.crear(mapper.toDomain(request)));
-}
+	@PostMapping
+	public ResponseEntity<?> crear(@Valid @RequestBody VeterinarioRequestDto request) {
+		try {
+			// Intentamos crear el veterinario
+			VeterinarioResponseDto response = mapper.toResponseDto(
+				veterinarioUseCase.crear(mapper.toDomain(request))
+			);
+			return new ResponseEntity<>(response, HttpStatus.CREATED);
+		} catch (RuntimeException e) {
+			
+			Map<String, String> error = new HashMap<>();
+			error.put("mensaje", e.getMessage());
+			return ResponseEntity.badRequest().body(error);
+		}
+	}
 	
 	@GetMapping
 	public List<VeterinarioResponseDto> listar(){
 		return veterinarioUseCase.listar()
 				.stream()
-				.map(mapper::toResponseDto).toList();
+				.map(mapper::toResponseDto)
+				.toList();
 	}
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> eliminar(@PathVariable int id){
 		veterinarioUseCase.eliminar(id);
@@ -59,9 +66,8 @@ public class VeterinarioController {
 	    return ResponseEntity.ok(lista);
 	}
 	
-	@GetMapping("buscarid/{idVeterinario}")
+	@GetMapping("/buscarid/{idVeterinario}")
 	public VeterinarioResponseDto buscarPorId(@PathVariable int idVeterinario) {
 		return mapper.toResponseDto(veterinarioUseCase.obtenerPorId(idVeterinario));
-		
 	}
 }

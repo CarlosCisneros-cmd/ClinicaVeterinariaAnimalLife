@@ -13,5 +13,6 @@ public interface IVeterinarioRepositorio {
 	void eliminar(int id);
 
 	List<Veterinario> buscarPorApellido(String apellido);
-	
+	boolean existePorCedula(String cedula);
+    boolean existePorCorreo(String correo);
 }
