@@ -30,4 +30,14 @@ public class CabeceraServicioImpl implements ICabeceraServicio{
 		
 	}
 
+	@Override
+	public CabeceraResponseDto buscarPorId(int id) {
+		return webcliente.get()
+	            .uri("/cabecera/" + id)
+	            .retrieve()
+	            .bodyToMono(CabeceraResponseDto.class)
+	            .block();
+	}
+
+	
 }

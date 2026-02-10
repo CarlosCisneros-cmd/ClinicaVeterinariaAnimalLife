@@ -2,6 +2,8 @@ package com.uisrael.apiALconsumo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean; 
+import org.springframework.web.client.RestTemplate; 
 
 @SpringBootApplication()
 public class ApiALconsumoApplication {
@@ -10,4 +12,8 @@ public class ApiALconsumoApplication {
 		SpringApplication.run(ApiALconsumoApplication.class, args);
 	}
 
+	@Bean
+	RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
 }

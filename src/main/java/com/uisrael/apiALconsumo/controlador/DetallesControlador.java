@@ -1,5 +1,6 @@
 package com.uisrael.apiALconsumo.controlador;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,13 +14,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lowagie.text.DocumentException;
+import com.uisrael.apiALconsumo.PDFexporter.DetallePDFExporter;
 import com.uisrael.apiALconsumo.modelo.dto.request.CabeceraRequestDto;
 
 import com.uisrael.apiALconsumo.modelo.dto.request.DetallesRequestDto;
-
+import com.uisrael.apiALconsumo.modelo.dto.response.CabeceraResponseDto;
 import com.uisrael.apiALconsumo.modelo.dto.response.DetallesResponseDto;
-
+import com.uisrael.apiALconsumo.servicio.ICabeceraServicio;
 import com.uisrael.apiALconsumo.servicio.IDetallesServicio;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/detalles")
@@ -27,6 +32,8 @@ public class DetallesControlador {
 	
 	@Autowired
     private IDetallesServicio detallesService;
+	@Autowired
+    private ICabeceraServicio servicioCabecera;
 
     @GetMapping("/listar")
     public String listarDetalles(@RequestParam int idCabecera, Model model) {
@@ -64,5 +71,22 @@ public class DetallesControlador {
     }
     
     
+    @GetMapping("/exportarPDF")
+    public void exportarPDF(@RequestParam int idCabecera, HttpServletResponse response) 
+            throws DocumentException, IOException {
+        
+        CabeceraResponseDto cabecera = servicioCabecera.buscarPorId(idCabecera);
+        List<DetallesResponseDto> detalles = detallesService.listarPorCabecera(idCabecera);
 
+
+        response.setContentType("application/pdf");
+        String nombreArchivo = "Historia_" + cabecera.getFkPaciente().getNombre() + ".pdf";
+        response.setHeader("Content-Disposition", "attachment; filename=" + nombreArchivo);
+
+
+        DetallePDFExporter exporter = new DetallePDFExporter(detalles, cabecera);
+        exporter.exportar(response);
+    }
 }
+    
+

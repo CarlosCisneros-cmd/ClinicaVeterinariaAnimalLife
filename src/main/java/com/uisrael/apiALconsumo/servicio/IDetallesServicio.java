@@ -14,4 +14,5 @@ public interface IDetallesServicio {
 	public DetallesResponseDto buscarPorId(int id);
 	public void eliminarDetalle(int id);
 	DetallesResponseDto obtenerPorId(int id);
+	List<DetallesResponseDto> listarPorCabecera(int idCabecera);
 }
