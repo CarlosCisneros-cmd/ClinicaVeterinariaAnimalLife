@@ -68,23 +68,30 @@ public class CitaControlador {
             citaServicio.crearCita(cita);
             return "redirect:/Cita/Listarcita";
 
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
+            String mensajeError = e.getMessage();
             
-            model.addAttribute("error", e.getMessage());
+       
+            if (mensajeError.contains("mensaje\":")) {
+                
+                 mensajeError = mensajeError.split("mensaje\":\"")[1].split("\"")[0];
+            }
+
+            model.addAttribute("error", mensajeError);
             model.addAttribute("cita", cita);
             
-           
+            
             model.addAttribute("listaVeterinarios", veterinarioServicio.listarVeterinario());
             model.addAttribute("listaServicios", servicioCatalogo.listarServicio());
 
-            
+        
             if (cita.getFkPaciente() != null && cita.getFkPaciente().getIdPaciente() > 0) {
                 try {
                     PacienteResponseDTO paciente = pacienteServicio.obtenerPorId(cita.getFkPaciente().getIdPaciente());
                     model.addAttribute("nombreMascota", paciente.getNombre());
                     model.addAttribute("nombreDuenio", paciente.getFkCliente().getNombres() + " " + paciente.getFkCliente().getApellidos());
                 } catch (Exception ex) {
-                   
+        
                 }
             }
             
