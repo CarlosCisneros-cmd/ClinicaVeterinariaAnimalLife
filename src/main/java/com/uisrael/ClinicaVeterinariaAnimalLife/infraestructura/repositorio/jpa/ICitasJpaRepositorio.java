@@ -21,4 +21,12 @@ public interface ICitasJpaRepositorio extends JpaRepository<CitasJpa, Integer>{
 	    @Param("fecha_Hora") LocalDateTime fecha_Hora
 	);
 
+	
+	@Query("SELECT COUNT(c) FROM CitasJpa c " +
+	           "WHERE c.fkVeterinario.idveterinario = :idVeterinario " + 
+	           "AND c.fecha_Hora BETWEEN :horaInicio AND :horaFin " +
+	           "AND c.estado = true")
+	    Long contarCitasEnHorario(@Param("idVeterinario") int idVeterinario, 
+	                              @Param("horaInicio") LocalDateTime horaInicio, 
+	                              @Param("horaFin") LocalDateTime horaFin);
 }

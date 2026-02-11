@@ -62,4 +62,16 @@ public class CitasRepositorioImpl implements ICitasRepositorio {
 			.toList();
 	}
 
+	@Override
+	public boolean verificarDisponibilidad(int idVeterinario, LocalDateTime fechaHora) {
+		LocalDateTime inicio = fechaHora.minusMinutes(29);
+	    LocalDateTime fin = fechaHora.plusMinutes(29);
+
+	    Long cantidad = jpaRepository.contarCitasEnHorario(idVeterinario, inicio, fin);
+	    
+	    return cantidad == 0;
+	}
+	
+	
+
 }

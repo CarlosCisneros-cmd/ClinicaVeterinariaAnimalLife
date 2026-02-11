@@ -20,6 +20,15 @@ public class CitasUseCaseImpl implements ICitaUseCase {
 		if (citas.getFecha_Hora() != null && citas.getFecha_Hora().isBefore(LocalDateTime.now())) {
 			throw new RuntimeException("No se puede agendar la cita: La fecha y hora seleccionada ya ha pasado.");
 		}
+		boolean disponible = repositorio.verificarDisponibilidad(
+		        citas.getFkVeterinario().getIdveterinario(), 
+		        citas.getFecha_Hora()
+		    );
+
+		    if (!disponible) {
+		        throw new RuntimeException("El veterinario ya tiene una cita agendada en un rango cercano a este horario. " +
+		                                   "Por favor, elija una hora con al menos 30 minutos de diferencia.");
+		    }
 		return repositorio.guardar(citas);
 	}
 
@@ -48,4 +57,6 @@ public class CitasUseCaseImpl implements ICitaUseCase {
 	public List<Citas> buscarCitasPorVeterinarioyFecha(String nombre, LocalDateTime fecha_hora) {
 		return repositorio.buscarCitasPorVeterinarioyFecha(nombre, fecha_hora);
 	}
+	
+	
 }

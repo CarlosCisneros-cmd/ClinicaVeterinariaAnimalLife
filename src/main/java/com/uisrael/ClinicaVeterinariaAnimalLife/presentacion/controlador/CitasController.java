@@ -84,4 +84,7 @@ public class CitasController {
     public CitasResponseDto buscarPorId(@PathVariable int idCita) {
         return mapper.toResponseDto(citaUseCase.obtenerPorId(idCita));
     }
+    
+    
+    
 }

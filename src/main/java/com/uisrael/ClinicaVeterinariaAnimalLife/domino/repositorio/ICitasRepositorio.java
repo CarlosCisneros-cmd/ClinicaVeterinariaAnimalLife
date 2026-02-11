@@ -18,4 +18,5 @@ public interface ICitasRepositorio {
 
 	List<Citas> buscarCitasPorVeterinarioyFecha(String nombre, LocalDateTime fecha_Hora);
 
+    boolean verificarDisponibilidad(int idVeterinario, LocalDateTime fechaHora);
 }
